@@ -31,11 +31,7 @@ const napisRuch = useTemplateRef('ruchGracza2')
 const kostkaOczka = useTemplateRef('oczkaKostka')
 
 onMounted(() => {
-    // const elementToFocus = document.querySelector(".rzut2")
-    // if (elementToFocus && props.ifButtonOnFocusMain2 === true) {
-    //     elementToFocus.focus();
-    // }
-
+ 
     if(props.ifButtonOnFocusMain2===true){
         button_rzut.value.focus()
     }
@@ -104,8 +100,6 @@ const if_szansa1 = ref(true)
 const if_szansa2 = ref(true)
 const if_szansa3 = ref(true)
 const if_szansa4 = ref(true)
-
-//const obrazek_kostki = ref('../assets/kostka_1oczko.png')
 
 let kolekcja_widoków_kostki = [
     false,
@@ -221,9 +215,6 @@ async function kostka_click() {
             console.log(arg_B[arg_C.value + i])
 
 
-
-            //arg_A.setPosition(arg_B[arg_C + i][0], arg_B[arg_C + i][1]);
-
             if (ruch_lokalny >= 15) {
                 console.log("Zwycięstwo!");
                 kontrolka_ruch_na_planszy = false;
@@ -243,9 +234,6 @@ async function kostka_click() {
                 dodanie_krokow();
                 pulapka_czy_quizz();
             }
-
-
-            //  ..  setTimeout()
 
         }, 1000);
     };
@@ -289,10 +277,7 @@ async function kostka_click() {
                 //  pokazuje planszę pułapki
                 setTimeout(async() => {
                     if_widok_pulapki.value = true;
-                    //if(krok_gracz1_na_planszy.value!=3){
-                    //trapType.value=metodyPomocnicze.aheadOrBack()
-                    //}
-                    //else{trapType.value=0}
+                 
                     await nextTick()
                      titleTrap.value=metodyPomocnicze.pokazTekstPulapki(krok_gracz1_na_planszy.value)[0]
                      textTrap.value=metodyPomocnicze.pokazTekstPulapki(krok_gracz1_na_planszy.value)[1]
@@ -334,12 +319,10 @@ const koniecQuizu = () => {
         }, 300);
     })
 
-    //buttonRzutVis.then((res) => { res.focus() })
 }
 
     if (krok_gracz1_na_planszy.value === 15) {
         if_rzuc_kostka.value = false
-         //if_ruch_gracza.value = false
         console.log("plansza win!")
         emit('koniec-etap2')
      
@@ -348,7 +331,6 @@ const koniecQuizu = () => {
 
 const koniecQuizuFocusOn =async () => {
      if (krok_gracz1_na_planszy.value < 15) {
-    // if_rzuc_kostka.value = true
 
      napisRuch.value.focus()
         setTimeout(() => {
@@ -363,22 +345,9 @@ const koniecQuizuFocusOn =async () => {
             button_rzut.value.focus()
         }, 2000)
 
-        // setTimeout(() => {
-        //     if_ruch_gracza.value = false
-        // }, 2300) //było 2500 i było ok
-
-
-    // const buttonRzutVis = new Promise((resolve, reject) => {
-    //     setTimeout(() => {
-    //         resolve(document.querySelector(".rzut2"))
-    //     }, 300);
-    // })
-
-    // buttonRzutVis.then((res) => { res.focus() })
 }
 if(krok_gracz1_na_planszy.value === 15) {
         if_rzuc_kostka.value = false
-        // if_ruch_gracza.value = false
          napisRuch.value.focus()
         await nextTick()
         console.log("plansza win focus!")  
@@ -390,14 +359,7 @@ if(krok_gracz1_na_planszy.value === 15) {
 const koniecPulapki = () => {
     console.log("emmiter - krok do tyłu");
     console.log(krok_gracz1_na_planszy.value);
-    // krok_gracz1_na_planszy.value = krok_gracz1_na_planszy.value - 2;
-    // ruch_lokalny = ruch_lokalny - 2;
-    // console.log(krok_gracz1_na_planszy.value);
-    // pionek_left.value = pozycje_pionka_gracza1[krok_gracz1_na_planszy.value - 1][0]
-    // pionek_top.value = pozycje_pionka_gracza1[krok_gracz1_na_planszy.value - 1][1]
 
-        //nowe roziazanie planszy zasadzka - początek
-    // let oIlePol = metodyPomocnicze.aheadOrBack();
     let oIlePol = trapType.value;
     console.log(oIlePol)
 
@@ -442,27 +404,11 @@ const koniecPulapki = () => {
     if_ruch_gracza.value = false
     if_rzuc_kostka.value = true;
 
-    // const buttonRzutVis = new Promise((resolve, reject) => {
-    //     setTimeout(() => {
-    //         resolve(document.querySelector(".rzut2"))
-    //     }, 300);
-    // })
-
-    // buttonRzutVis.then((res) => { res.focus() })
 }
 
 const koniecPulapkiFocusOn = () => {
     console.log("emmiter - krok do tyłu");
     console.log(krok_gracz1_na_planszy.value);
-    // krok_gracz1_na_planszy.value = krok_gracz1_na_planszy.value - 2;
-    // ruch_lokalny = ruch_lokalny - 2;
-    // console.log(krok_gracz1_na_planszy.value);
-    // pionek_left.value = pozycje_pionka_gracza1[krok_gracz1_na_planszy.value - 1][0]
-    // pionek_top.value = pozycje_pionka_gracza1[krok_gracz1_na_planszy.value - 1][1]
-
-   //nowe roziazanie planszy zasadzka - początek
-    // let oIlePol = metodyPomocnicze.aheadOrBack();
-    
 
     if (krok_gracz1_na_planszy.value === 3) {
         krok_gracz1_na_planszy.value = krok_gracz1_na_planszy.value +1;
@@ -503,16 +449,6 @@ const koniecPulapkiFocusOn = () => {
 
     // koniec tego rozwiązania
 
-    // if_rzuc_kostka.value = true;
-
-    // const buttonRzutVis = new Promise((resolve, reject) => {
-    //     setTimeout(() => {
-    //         resolve(document.querySelector(".rzut2"))
-    //     }, 300);
-    // })
-
-    // buttonRzutVis.then((res) => { res.focus() })
-
      napisRuch.value.focus()
     setTimeout(() => {
 
@@ -521,14 +457,9 @@ const koniecPulapkiFocusOn = () => {
     }, 1000)
 
     setTimeout(() => {
-        //const button_rzut2=useTemplateRef('rzut1')
          if_ruch_gracza.value=false
         button_rzut.value.focus()
     }, 2000)
-
-    // setTimeout(() => {
-    //     if_ruch_gracza.value = false
-    // }, 2500)
 
 }
 
@@ -745,7 +676,6 @@ function clickWithMouse() {
     font-style: bold;
     font-weight: 700;
     font-family: "Proxima Nova", sans-serif;
-    /*background-image: url("../assets/rzut_przycisk.png");*/
     background-size: 333px 86px;
     background-repeat: no-repeat;
     top: 560px;
@@ -790,7 +720,6 @@ function clickWithMouse() {
 }
 
 .rzut2:focus {
-    /* outline: thick double #08e926; */
    outline: 5px solid #000000;
     outline-offset: 10px;
 }

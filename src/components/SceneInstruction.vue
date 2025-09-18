@@ -98,16 +98,6 @@ const textToDisplayCzytnik= "Znajdujesz się w Wirtualnej Dżungli - aby ją prz
   text-align: center;
 }
 
-/* .kontener-instrukcja {
-  display: flex;
-  align-items: center;
-  padding: .5rem 1rem;
-   width: 1300px; 
-  width: 1400px;
-  top: 210px;
-  left: 260px;
-  position: absolute;
-} */
 
 .kontener-instrukcja {
   /* display: flex;
@@ -132,9 +122,6 @@ const textToDisplayCzytnik= "Znajdujesz się w Wirtualnej Dżungli - aby ją prz
 
 }
 
-/* .instrukcja:focus{
-   outline:  0px solid #9a009e !important;
-} */
 
 .gwiazdka {
   position: relative;
@@ -167,7 +154,6 @@ const textToDisplayCzytnik= "Znajdujesz się w Wirtualnej Dżungli - aby ją prz
 }
 
 .dalej {
-  /* background-image: url("../assets/przycisk_dalej_imie.png"); */
   color: rgb(29, 56, 80);
   font-size: 70px;
   font-style: bold;
@@ -195,9 +181,6 @@ const textToDisplayCzytnik= "Znajdujesz się w Wirtualnej Dżungli - aby ją prz
 }
 
 .dalej:focus {
-  /* border: 4px solid #08e926; */
-  /* outline: thick double #08e926; */
-  /*outline: 5px solid #08e926;*/
   outline: 5px solid white;
   outline-offset: 10px;
 }

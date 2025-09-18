@@ -27,10 +27,6 @@ const napisRuch = useTemplateRef('ruchGracza')
 const kostkaOczka = useTemplateRef('oczkaKostka')
 
 onMounted(() => {
-    // const elementToFocus = document.querySelector(".rzut1")
-    // if (elementToFocus && props.ifButtonOnFocusMain1 === true) {
-    //     elementToFocus.focus();
-    // }
 
     //nowe podejście bez korzystania asynchroniczności
     if (props.ifButtonOnFocusMain1 === true) {
@@ -38,12 +34,7 @@ onMounted(() => {
     }
 
     emit('reset-gwiazdek')
-    // const ruchGraczaNapis = new Promise((resolve, reject) => {
-    //     setTimeout(() => {
-    //         resolve(document.querySelector(".ruch1"))
-    //     }, 300);
-    // })
-
+  
 })
 
 //roboczo tylko dla starej funkcji
@@ -89,8 +80,6 @@ const if_szansa1 = ref(true)
 const if_szansa2 = ref(true)
 const if_szansa3 = ref(true)
 
-//const obrazek_kostki = ref('../assets/kostka_1oczko.png')
-
 let kolekcja_widoków_kostki = [
     false,
     false,
@@ -124,6 +113,7 @@ let kontrolka_ruch_na_planszy = true;
 // licznik ruchu na planszy - faktyczny ruch pionka
 let ruch_lokalny = 0;
 
+// zmienna robocza
 let x;
 
 //instancja obieku odpowiadającego za pułapki
@@ -141,16 +131,9 @@ async function kostka_click() {
 
     if_ruch_gracza.value = true
     await nextTick()
-    // if(napisRuch.value){
-    //napisRuch.value.focus()
-
-    //}
+    
     if_rzuc_kostka.value = false //  ukryj przycisk rzuć kostką
 
-
-
-
-    //ruchGraczaNapis.then((res) => { res.focus() })
 
     //========================================================================================
     let i = 0; //  set your counter to 0
@@ -193,14 +176,12 @@ async function kostka_click() {
             kolekcja_widoków_kostki[i] = false
         }
 
-
         isSet1.value = kolekcja_widoków_kostki[0]
         isSet2.value = kolekcja_widoków_kostki[1]
         isSet3.value = kolekcja_widoków_kostki[2]
         isSet4.value = kolekcja_widoków_kostki[3]
         isSet5.value = kolekcja_widoków_kostki[4]
         isSet6.value = kolekcja_widoków_kostki[5]
-
 
     }
 
@@ -292,10 +273,6 @@ async function kostka_click() {
                 //  pokazuje planszę pułapki
                 setTimeout(async () => {
                     if_widok_pulapki.value = true;
-                    // if(krok_gracz1_na_planszy.value!=3||krok_gracz1_na_planszy.value != 14){
-                    // trapType.value=metodyPomocnicze.aheadOrBack()
-                    // }
-                    // else{trapType.value=0} 
                     await nextTick()
                     titleTrap.value = metodyPomocnicze.pokazTekstPulapki(krok_gracz1_na_planszy.value)[0]
                     textTrap.value = metodyPomocnicze.pokazTekstPulapki(krok_gracz1_na_planszy.value)[1]
@@ -339,7 +316,6 @@ const koniecQuizu = () => {
 
     if (krok_gracz1_na_planszy.value === 15) {
         if_rzuc_kostka.value = false
-        //if_ruch_gracza.value = false
         console.log("plansza win level!")
         emit('koniec-etap1')
 
@@ -367,8 +343,6 @@ const koniecQuizuFocusOn = async () => {
 
     if (krok_gracz1_na_planszy.value === 15) {
         if_rzuc_kostka.value = false
-        //if_ruch_gracza.value = false
-
         napisRuch.value.focus()
         await nextTick()
         console.log("plansza win level focus!")
@@ -384,7 +358,6 @@ const koniecPulapki = () => {
     console.log(krok_gracz1_na_planszy.value);
 
     //nowe roziazanie planszy zasadzka - początek
-    // let oIlePol = metodyPomocnicze.aheadOrBack();
     let oIlePol = trapType.value;
     console.log(oIlePol)
 
@@ -719,16 +692,12 @@ function clickWithMouse() {
     width: 333px;
     position: absolute;
     z-index: 2;
-    /* outline: 4px solid transparent; */
 }
 
-/* .rzut1:hover {
-    cursor: pointer;
-} */
+
 
 .rzut1:focus {
-    /* outline: thick double #08e926; */
-    /* outline: 5px solid #9a009e; */
+
     outline: 5px solid #000000;
     outline-offset: 10px;
 }
@@ -739,7 +708,6 @@ function clickWithMouse() {
     font-style: bold;
     font-weight: 700;
     font-family: "Proxima Nova", sans-serif;
-    /*background-image: url("../assets/rzut_przycisk.png");*/
     background-size: 333px 86px;
     background-repeat: no-repeat;
     top: 560px;

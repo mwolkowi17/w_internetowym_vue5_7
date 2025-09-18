@@ -28,6 +28,7 @@ const ifFocusEmitGlobal = ref(false)
 //referencje do el html używane do obsługi focusa
 const button_rzut = useTemplateRef('rzut2')
 const napisRuch = useTemplateRef('ruchGracza2')
+const kostkaOczka = useTemplateRef('oczkaKostka')
 
 onMounted(() => {
     // const elementToFocus = document.querySelector(".rzut2")
@@ -149,7 +150,7 @@ async function kostka_click() {
     if_ruch_gracza.value=true
     await nextTick()
 
-    napisRuch.value.focus()
+    //napisRuch.value.focus()
 
     if_rzuc_kostka.value = false //  ukryj przycisk rzuć kostką
     //========================================================================================
@@ -161,6 +162,8 @@ async function kostka_click() {
     // nowa funkcjonalnosc ograniczająca ilośc wpadek  
     let wartoscWyrzuconaFirst = metodyPomocnicze.rzucaj()
     console.log("oczka: " + wartoscWyrzuconaFirst)
+    await nextTick()
+    kostkaOczka.value.focus()
     if (liczba_wpadek.value < 2) {
         console.log("ilość wpadek: " + liczba_wpadek.value)
         liczba_wyrzucona.value = wartoscWyrzuconaFirst
@@ -336,14 +339,14 @@ const koniecQuizu = () => {
 
     if (krok_gracz1_na_planszy.value === 15) {
         if_rzuc_kostka.value = false
-         if_ruch_gracza.value = false
+         //if_ruch_gracza.value = false
         console.log("plansza win!")
         emit('koniec-etap2')
      
     }
 }
 
-const koniecQuizuFocusOn = () => {
+const koniecQuizuFocusOn =async () => {
      if (krok_gracz1_na_planszy.value < 15) {
     // if_rzuc_kostka.value = true
 
@@ -376,6 +379,8 @@ const koniecQuizuFocusOn = () => {
 if(krok_gracz1_na_planszy.value === 15) {
         if_rzuc_kostka.value = false
         // if_ruch_gracza.value = false
+         napisRuch.value.focus()
+        await nextTick()
         console.log("plansza win focus!")  
         ifFocusEmitGlobal.value = true
         emit('koniec-etap2-focus')
@@ -591,7 +596,7 @@ function clickWithMouse() {
     </div>
     <button class="rzut2 my-button anim1" ref="rzut2" v-if="if_rzuc_kostka" @click="clickWithMouse" @keydown.enter="clickWithFocus"
         role="button">Rzuć kostką</button>
-    <div class="kostka1" :class="{
+    <div class="kostka1" ref="oczkaKostka" tabindex="0" :class="{
         'kostka1image1': isSet1,
         'kostka1image2': isSet2,
         'kostka1image3': isSet3,
@@ -703,6 +708,11 @@ function clickWithMouse() {
     width: 250px;
     position: absolute;
     z-index: 2;
+}
+
+.kostka1:focus {
+    outline: 5px solid #000000;
+    outline-offset: 10px;
 }
 
 .kostka1image1 {

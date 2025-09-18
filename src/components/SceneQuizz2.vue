@@ -268,7 +268,7 @@ function zaznaczenie3() {
         @keydown.enter="ifButtonKoniecQuizzuOnFocus = true; sprawdzOdpowiedz" role="button">Sprawdź
         odpowiedź</button>
     <div class="plansza-dobrze" v-if="if_odpowiedz_dobrze">
-        <div class="info" ref="info" tabindex="0">
+        <div class="info" ref="info" tabindex="0" aria-label="Brawo! Prawidłowa odpowiedź.">
             <p class="naglowek-after-quizz naglowek-dobrze">Brawo!</p>
             <p class="napis-odpowiedz napis-dobrze">Prawidłowa odpowiedź.</p>
         </div>
@@ -278,9 +278,9 @@ function zaznaczenie3() {
         $emit('koniec-quizz')" @keydown.enter="if_odpowiedz_dobrze = false,
             if_button_dalej_dobrze = false, $emit('koniec-quizz-focus')" role="button">Dalej</button>
     <div class="plansza-zle" v-if="if_odpowiedz_zle">
-         <div class="info" ref="info" tabindex="0">
+         <div class="info" ref="info" tabindex="0" aria-label="Źle! Błędna odpowiedź. Tracisz jedną szansę">
         <p class="naglowek-after-quizz naglowek-zle">Źle!</p>
-        <p class="napis-odpowiedz napis-zle">Błędna odpowiedź. Tracisz jedną szansę.</p>
+        <p class="napis-odpowiedz napis-zle">Błędna odpowiedź.</p>
         </div>
     </div>
     <button class="button-dalej-dobrze my-button anim1" v-if="if_button_dalej_zle" @click="if_odpowiedz_zle = false,

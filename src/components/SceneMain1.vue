@@ -24,6 +24,7 @@ const ifFocusEmitGlobal = ref(false)
 //referencje do el html używane do obsługi focusa
 const button_rzut = useTemplateRef('rzut1')
 const napisRuch = useTemplateRef('ruchGracza')
+const kostkaOczka = useTemplateRef('oczkaKostka')
 
 onMounted(() => {
     // const elementToFocus = document.querySelector(".rzut1")
@@ -132,8 +133,7 @@ const trap = new Traps();
 const liczba_wyrzucona = ref(0)
 const liczba_wpadek = ref(0)
 
-//dla Aria w "rzut gracza"
-const liczbaWyrzuconaAraia = ref(liczba_wyrzucona.value+1)
+
 
 const wyrzuconaWartoscKostki = ref("Kostka - liczba oczek: " + (x + 1));
 
@@ -142,7 +142,8 @@ async function kostka_click() {
     if_ruch_gracza.value = true
     await nextTick()
     // if(napisRuch.value){
-    napisRuch.value.focus()
+    //napisRuch.value.focus()
+
     //}
     if_rzuc_kostka.value = false //  ukryj przycisk rzuć kostką
 
@@ -160,6 +161,8 @@ async function kostka_click() {
     // nowa funkcjonalnosc ograniczająca ilośc wpadek  
     let wartoscWyrzuconaFirst = metodyPomocnicze.rzucaj()
     console.log("oczka: " + wartoscWyrzuconaFirst)
+    await nextTick()
+    kostkaOczka.value.focus()
     if (liczba_wpadek.value < 2) {
         console.log("ilość wpadek: " + liczba_wpadek.value)
         liczba_wyrzucona.value = wartoscWyrzuconaFirst
@@ -271,12 +274,11 @@ async function kostka_click() {
 
 
 
-     const pulapka_czy_quizz = () => {
+    const pulapka_czy_quizz = async () => {
         console.log("sprawdzam czy pułapka albo quizz");
         console.log(i)
         console.log("wynik rzutu: " + wynik_rzutu);
         console.log("kontrolka ruch na planszy: " + kontrolka_ruch_na_planszy);
-        //if (i === (wynik_rzutu+1) && kontrolka_ruch_na_planszy === true) {
         if (kontrolka_ruch_na_planszy === true) {
             console.log("pulapka albo quizz!!!");
             console.log("krok gracza na planszy: " + krok_gracz1_na_planszy.value);
@@ -288,15 +290,15 @@ async function kostka_click() {
                 //dodaje wpadki do licznika wpadek
                 liczba_wpadek.value = liczba_wpadek.value + 1
                 //  pokazuje planszę pułapki
-                setTimeout(async() => {
+                setTimeout(async () => {
                     if_widok_pulapki.value = true;
                     // if(krok_gracz1_na_planszy.value!=3||krok_gracz1_na_planszy.value != 14){
                     // trapType.value=metodyPomocnicze.aheadOrBack()
                     // }
                     // else{trapType.value=0} 
                     await nextTick()
-                     titleTrap.value=metodyPomocnicze.pokazTekstPulapki(krok_gracz1_na_planszy.value)[0]
-                     textTrap.value=metodyPomocnicze.pokazTekstPulapki(krok_gracz1_na_planszy.value)[1]
+                    titleTrap.value = metodyPomocnicze.pokazTekstPulapki(krok_gracz1_na_planszy.value)[0]
+                    textTrap.value = metodyPomocnicze.pokazTekstPulapki(krok_gracz1_na_planszy.value)[1]
                     const sound_cofasz = new Audio(new URL('../assets/zla_odp.mp3', import.meta.url).href);
                     sound_cofasz.play();
                 }, 1000)
@@ -346,7 +348,7 @@ const koniecQuizu = () => {
 
 const koniecQuizuFocusOn = async () => {
     if (krok_gracz1_na_planszy.value < 15) {
-    
+
         napisRuch.value.focus()
 
 
@@ -366,6 +368,9 @@ const koniecQuizuFocusOn = async () => {
     if (krok_gracz1_na_planszy.value === 15) {
         if_rzuc_kostka.value = false
         //if_ruch_gracza.value = false
+
+        napisRuch.value.focus()
+        await nextTick()
         console.log("plansza win level focus!")
         ifFocusEmitGlobal.value = true
         emit('koniec-etap1-focus')
@@ -384,7 +389,7 @@ const koniecPulapki = () => {
     console.log(oIlePol)
 
     if (krok_gracz1_na_planszy.value === 3) {
-        krok_gracz1_na_planszy.value = krok_gracz1_na_planszy.value +1;
+        krok_gracz1_na_planszy.value = krok_gracz1_na_planszy.value + 1;
         ruch_lokalny = ruch_lokalny + 1;
         console.log(krok_gracz1_na_planszy.value);
         pionek_left.value = pozycje_pionka_gracza1[krok_gracz1_na_planszy.value - 1][0]
@@ -397,7 +402,7 @@ const koniecPulapki = () => {
         pionek_left.value = pozycje_pionka_gracza1[krok_gracz1_na_planszy.value - 1][0]
         pionek_top.value = pozycje_pionka_gracza1[krok_gracz1_na_planszy.value - 1][1]
     }
-    if ( krok_gracz1_na_planszy.value === 8) {
+    if (krok_gracz1_na_planszy.value === 8) {
         krok_gracz1_na_planszy.value = krok_gracz1_na_planszy.value + 2;
         ruch_lokalny = ruch_lokalny + 2;
         console.log(krok_gracz1_na_planszy.value);
@@ -411,14 +416,14 @@ const koniecPulapki = () => {
         pionek_left.value = 30
         pionek_top.value = 330
     }
-    if ( krok_gracz1_na_planszy.value === 14) {
+    if (krok_gracz1_na_planszy.value === 14) {
         krok_gracz1_na_planszy.value = krok_gracz1_na_planszy.value - 1;
         ruch_lokalny = ruch_lokalny - 1;
         console.log(krok_gracz1_na_planszy.value);
         pionek_left.value = pozycje_pionka_gracza1[krok_gracz1_na_planszy.value - 1][0]
         pionek_top.value = pozycje_pionka_gracza1[krok_gracz1_na_planszy.value - 1][1]
     }
-   
+
 
     // koniec tego rozwiązania
     if_ruch_gracza.value = false
@@ -440,8 +445,8 @@ const koniecPulapkiFocusOn = async () => {
     let oIlePol = trapType.value;
     console.log(oIlePol)
 
-     if (krok_gracz1_na_planszy.value === 3) {
-        krok_gracz1_na_planszy.value = krok_gracz1_na_planszy.value +1;
+    if (krok_gracz1_na_planszy.value === 3) {
+        krok_gracz1_na_planszy.value = krok_gracz1_na_planszy.value + 1;
         ruch_lokalny = ruch_lokalny + 1;
         console.log(krok_gracz1_na_planszy.value);
         pionek_left.value = pozycje_pionka_gracza1[krok_gracz1_na_planszy.value - 1][0]
@@ -454,7 +459,7 @@ const koniecPulapkiFocusOn = async () => {
         pionek_left.value = pozycje_pionka_gracza1[krok_gracz1_na_planszy.value - 1][0]
         pionek_top.value = pozycje_pionka_gracza1[krok_gracz1_na_planszy.value - 1][1]
     }
-    if ( krok_gracz1_na_planszy.value === 8) {
+    if (krok_gracz1_na_planszy.value === 8) {
         krok_gracz1_na_planszy.value = krok_gracz1_na_planszy.value + 2;
         ruch_lokalny = ruch_lokalny + 2;
         console.log(krok_gracz1_na_planszy.value);
@@ -468,15 +473,15 @@ const koniecPulapkiFocusOn = async () => {
         pionek_left.value = 30
         pionek_top.value = 330
     }
-    if ( krok_gracz1_na_planszy.value === 14) {
+    if (krok_gracz1_na_planszy.value === 14) {
         krok_gracz1_na_planszy.value = krok_gracz1_na_planszy.value - 1;
         ruch_lokalny = ruch_lokalny - 1;
         console.log(krok_gracz1_na_planszy.value);
         pionek_left.value = pozycje_pionka_gracza1[krok_gracz1_na_planszy.value - 1][0]
         pionek_top.value = pozycje_pionka_gracza1[krok_gracz1_na_planszy.value - 1][1]
     }
-   
-    
+
+
     napisRuch.value.focus()
 
 
@@ -553,12 +558,12 @@ function clickWithMouse() {
     <div class="szansa1 szansa_ksztalt1" v-if="if_szansa1" role="img" alt="ikona" aria-label="Szansa 1"></div>
     <div class="szansa2 szansa_ksztalt1" v-if="if_szansa2" role="img" alt="ikona" aria-label="Szansa 2"></div>
     <div class="szansa3 szansa_ksztalt1" v-if="if_szansa3" role="img" alt="ikona" aria-label="Szansa 3"></div>
-    <div class="ruch1" ref="ruchGracza" v-if="if_ruch_gracza" tabindex="0" :aria-label="liczbaWyrzuconaAraia">
+    <div class="ruch1" ref="ruchGracza" v-if="if_ruch_gracza" tabindex="0">
         <p class="ruch-text">Ruch gracza</p>
     </div>
     <button ref="rzut1" class="rzut1 my-button anim1" v-if="if_rzuc_kostka" @click="clickWithMouse"
         @keydown.enter="clickWithFocus" role="button">Rzuć kostką</button>
-    <div class="kostka1" :class="{
+    <div class="kostka1" ref="oczkaKostka" tabindex="0" :class="{
         'kostka1image1': isSet1,
         'kostka1image2': isSet2,
         'kostka1image3': isSet3,
@@ -668,6 +673,11 @@ function clickWithMouse() {
     width: 250px;
     position: absolute;
     z-index: 2;
+}
+
+.kostka1:focus {
+    outline: 5px solid #000000;
+    outline-offset: 10px;
 }
 
 .kostka1image1 {

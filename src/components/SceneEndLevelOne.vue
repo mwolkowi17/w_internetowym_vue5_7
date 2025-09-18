@@ -25,8 +25,8 @@ fanfary.play();
     <div class="plansza-win-level-one">
         <div class="info-win1" ref="info-win1" tabindex="0" aria-label="Brawo udało Ci się ukończyć Poziom 1. Chcesz grać dalej?">
         <h1 class="naglowek">Brawo!</h1>
-        <p class="napis">Udało ci się ukończyć <b>Poziom 1,</b></p>
-        <p class="napis-2">chcesz grać dalej?</p>
+        <p class="napis">Udało ci się ukończyć <b>Poziom 1</b></p>
+        <p class="napis-2"> - chcesz grać dalej?</p>
         </div>
     </div>
     <button class="gram-jeszcze-1-level-one my-button anim1" @click="$emit('gram-dalej')" @keydown.enter="$emit('gram-dalej-focus')" role="button">Gram dalej</button>

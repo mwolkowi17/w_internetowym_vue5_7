@@ -17,8 +17,6 @@ const props = defineProps({
     starsNumber: Number
 })
 
-
-
 //obsługa focusa
 const ifQuizzFocusOn2 = ref(false)
 const ifTrapFocusOn = ref(false)
@@ -121,8 +119,6 @@ const isSet6 = ref(kolekcja_widoków_kostki[5])
 const pionek_left = ref(30)
 const pionek_top = ref(330)
 
-const mapa_pozycji_pionka = new PawnMaps()
-
 //flaga true/false pokazująca czy gracz nr 1 nie przeszedł całej planszy, wartość falsce wskazuje zakończenie ruchu na planszy
 let kontrolka_ruch_na_planszy = true;
 
@@ -134,7 +130,7 @@ let x;
 //instancja obieku odpowiadającego za pułapki
 const trap = new Traps();
 
-// nowa funkcjonalnosc ograniczająca ilośc wpadek - zmienne sterujace
+//funkcjonalnosc ograniczająca ilośc wpadek - zmienne sterujace
 const liczba_wyrzucona = ref(0)
 const liczba_wpadek = ref(0)
 
@@ -153,7 +149,7 @@ async function kostka_click() {
     if_widok_kostki.value = true
     console.log("rzut")
 
-    // nowa funkcjonalnosc ograniczająca ilośc wpadek  
+    // funkcjonalnosc ograniczająca ilośc wpadek  
     let wartoscWyrzuconaFirst = metodyPomocnicze.rzucaj()
     console.log("oczka: " + wartoscWyrzuconaFirst)
     await nextTick()
@@ -188,14 +184,12 @@ async function kostka_click() {
             kolekcja_widoków_kostki[i] = false
         }
 
-
         isSet1.value = kolekcja_widoków_kostki[0]
         isSet2.value = kolekcja_widoków_kostki[1]
         isSet3.value = kolekcja_widoków_kostki[2]
         isSet4.value = kolekcja_widoków_kostki[3]
         isSet5.value = kolekcja_widoków_kostki[4]
         isSet6.value = kolekcja_widoków_kostki[5]
-
 
     }
 
@@ -214,7 +208,6 @@ async function kostka_click() {
             console.log(arg_C.value)
             console.log(arg_B[arg_C.value + i])
 
-
             if (ruch_lokalny >= 15) {
                 console.log("Zwycięstwo!");
                 kontrolka_ruch_na_planszy = false;
@@ -222,12 +215,10 @@ async function kostka_click() {
                 wywolanie_sceny_koncowej();
             }
 
-
             ruch_lokalny++;
 
             i++; //  increment the counter
 
-            // if (i <= wynik_rzutu && ruch_lokalny <= 15) {
             if (i <= wynik_rzutu && ruch_lokalny <= 15) {
                 myLoopPionek(arg_A, arg_B, arg_C); //  ..  again which will trigger another                         
             } else {
@@ -238,12 +229,10 @@ async function kostka_click() {
         }, 1000);
     };
 
-
     function dodanie_krokow() {
         krok_gracz1_na_planszy.value =
             krok_gracz1_na_planszy.value + wynik_rzutu + 1;
     }
-
 
     if (kontrolka_ruch_na_planszy === true) {
         //  start the loop
@@ -256,7 +245,6 @@ async function kostka_click() {
 
         console.log("krok na planszy: " + krok_gracz1_na_planszy.value);
     }
-
 
     const pulapka_czy_quizz = () => {
         console.log("sprawdzam czy pułapka albo quizz");
@@ -305,7 +293,6 @@ async function kostka_click() {
         }
     };
 
-
 }
 
 const koniecQuizu = () => {
@@ -325,7 +312,6 @@ const koniecQuizu = () => {
         if_rzuc_kostka.value = false
         console.log("plansza win!")
         emit('koniec-etap2')
-     
     }
 }
 
@@ -334,9 +320,7 @@ const koniecQuizuFocusOn =async () => {
 
      napisRuch.value.focus()
         setTimeout(() => {
-
             if_rzuc_kostka.value = true
-
         }, 1000)
 
         setTimeout(() => {
@@ -399,11 +383,9 @@ const koniecPulapki = () => {
         pionek_top.value = pozycje_pionka_gracza1[krok_gracz1_na_planszy.value - 1][1]
     }
    
-
     // koniec tego rozwiązania
     if_ruch_gracza.value = false
     if_rzuc_kostka.value = true;
-
 }
 
 const koniecPulapkiFocusOn = () => {
@@ -446,7 +428,6 @@ const koniecPulapkiFocusOn = () => {
         pionek_top.value = pozycje_pionka_gracza1[krok_gracz1_na_planszy.value - 1][1]
     }
    
-
     // koniec tego rozwiązania
 
      napisRuch.value.focus()

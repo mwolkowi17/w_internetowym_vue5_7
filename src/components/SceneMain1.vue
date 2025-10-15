@@ -28,7 +28,6 @@ const kostkaOczka = useTemplateRef('oczkaKostka')
 
 onMounted(() => {
 
-    //nowe podejście bez korzystania asynchroniczności
     if (props.ifButtonOnFocusMain1 === true) {
         button_rzut.value.focus()
     }
@@ -75,6 +74,7 @@ const trapType = ref(0)
 //wartości propsów planszy zasadzka
 const titleTrap = ref("Zasadzka!")
 const textTrap = ref("Cofasz się o 2 pola.")
+
 //widoki szans na planszy
 const if_szansa1 = ref(true)
 const if_szansa2 = ref(true)
@@ -105,7 +105,6 @@ const pionek_top = ref(330)
 // const pionek_top = ref(pozycje_pionka_gracza1[15][1])
 
 
-const mapa_pozycji_pionka = new PawnMaps()
 
 //flaga true/false pokazująca czy gracz nr 1 nie przeszedł całej planszy, wartość falsce wskazuje zakończenie ruchu na planszy
 let kontrolka_ruch_na_planszy = true;
@@ -113,7 +112,7 @@ let kontrolka_ruch_na_planszy = true;
 // licznik ruchu na planszy - faktyczny ruch pionka
 let ruch_lokalny = 0;
 
-// zmienna robocza
+// zmienna robocza używana przy liczbie wyrzuconych oczek
 let x;
 
 //instancja obieku odpowiadającego za pułapki
@@ -130,10 +129,10 @@ const wyrzuconaWartoscKostki = ref("Kostka - liczba oczek: " + (x + 1));
 async function kostka_click() {
 
     if_ruch_gracza.value = true
+
     await nextTick()
     
     if_rzuc_kostka.value = false //  ukryj przycisk rzuć kostką
-
 
     //========================================================================================
     let i = 0; //  set your counter to 0
@@ -141,7 +140,7 @@ async function kostka_click() {
     if_widok_kostki.value = true
     console.log("rzut")
 
-    // nowa funkcjonalnosc ograniczająca ilośc wpadek  
+    //funkcjonalnosc ograniczająca ilośc wpadek  
     let wartoscWyrzuconaFirst = metodyPomocnicze.rzucaj()
     console.log("oczka: " + wartoscWyrzuconaFirst)
     await nextTick()
@@ -162,7 +161,7 @@ async function kostka_click() {
         console.log("ilość wpadek powyżej: " + liczba_wpadek.value)
         liczba_wyrzucona.value = wartoscWyrzuconaFirst
     }
-    //========================================koniec tej funcjonalnosci===============================================
+    //========================================koniec funcjonalnosci ograniczającej liczbę wpadek===============================================
 
     x = liczba_wyrzucona.value
     wyrzuconaWartoscKostki.value = "Kostka - liczba oczek: " + (x + 1);
@@ -189,7 +188,7 @@ async function kostka_click() {
 
     //!!============================ruch pionka loop =========================================
     const myLoopPionek = (arg_A, arg_B, arg_C) => {
-        //  create a loop function
+        //  loop function
         setTimeout(function () {
             //  call a 1s setTimeout when the loop is called
 
@@ -200,14 +199,8 @@ async function kostka_click() {
             // pionek_left.value = arg_B[1][0]
             // pionek_top.value = arg_B[1][1]
 
-
-            //console.log(arg_B)
             console.log(arg_C.value)
             console.log(arg_B[arg_C.value + i])
-
-
-
-            //arg_A.setPosition(arg_B[arg_C + i][0], arg_B[arg_C + i][1]);
 
             if (ruch_lokalny >= 15) {
                 console.log("Zwycięstwo!");
@@ -216,12 +209,10 @@ async function kostka_click() {
                 wywolanie_sceny_koncowej();
             }
 
-
             ruch_lokalny++;
 
             i++; //  increment the counter
 
-            // if (i <= wynik_rzutu && ruch_lokalny <= 15) {
             if (i <= wynik_rzutu && ruch_lokalny <= 15) {
                 myLoopPionek(arg_A, arg_B, arg_C); //  ..  again which will trigger another                         
             } else {
@@ -229,7 +220,6 @@ async function kostka_click() {
                 pulapka_czy_quizz();
                 //if_ruch_gracza.value=false;
             }
-
 
         }, 1000);
     };
@@ -252,8 +242,6 @@ async function kostka_click() {
 
         console.log("krok na planszy: " + krok_gracz1_na_planszy.value);
     }
-
-
 
     const pulapka_czy_quizz = async () => {
         console.log("sprawdzam czy pułapka albo quizz");
@@ -298,7 +286,6 @@ async function kostka_click() {
         if (ifFocusEmitGlobal.value === true) {
             emit('koniec-etap1-focus')
         }
-
     };
 
 }
@@ -326,9 +313,6 @@ const koniecQuizuFocusOn = async () => {
     if (krok_gracz1_na_planszy.value < 15) {
 
         napisRuch.value.focus()
-
-
-
         setTimeout(() => {
             if_rzuc_kostka.value = true
         }, 1000)
@@ -357,7 +341,7 @@ const koniecPulapki = () => {
     console.log("emmiter - krok do tyłu");
     console.log(krok_gracz1_na_planszy.value);
 
-    //nowe roziazanie planszy zasadzka - początek
+    //nowe roziazanie planszy zasadzka - różne efekty po wejściu na pole
     let oIlePol = trapType.value;
     console.log(oIlePol)
 
@@ -397,8 +381,8 @@ const koniecPulapki = () => {
         pionek_top.value = pozycje_pionka_gracza1[krok_gracz1_na_planszy.value - 1][1]
     }
 
-
     // koniec tego rozwiązania
+
     if_ruch_gracza.value = false
     if_rzuc_kostka.value = true;
 
@@ -407,14 +391,9 @@ const koniecPulapki = () => {
 const koniecPulapkiFocusOn = async () => {
     console.log("emmiter - krok do tyłu");
     console.log(krok_gracz1_na_planszy.value);
-    // krok_gracz1_na_planszy.value = krok_gracz1_na_planszy.value - 2;
-    // ruch_lokalny = ruch_lokalny - 2;
-    // console.log(krok_gracz1_na_planszy.value);
-    // pionek_left.value = pozycje_pionka_gracza1[krok_gracz1_na_planszy.value - 1][0]
-    // pionek_top.value = pozycje_pionka_gracza1[krok_gracz1_na_planszy.value - 1][1]
-
-    //nowe roziazanie planszy zasadzka - początek
-    // let oIlePol = metodyPomocnicze.aheadOrBack();
+    
+    //nowe roziazanie planszy zasadzka - różne efekty po wejściu na pole
+  
     let oIlePol = trapType.value;
     console.log(oIlePol)
 
@@ -454,9 +433,7 @@ const koniecPulapkiFocusOn = async () => {
         pionek_top.value = pozycje_pionka_gracza1[krok_gracz1_na_planszy.value - 1][1]
     }
 
-
     napisRuch.value.focus()
-
 
     setTimeout(() => {
 
@@ -471,9 +448,6 @@ const koniecPulapkiFocusOn = async () => {
 
 
     }, 2000)
-
-
-
 
 }
 
@@ -519,6 +493,7 @@ function clickWithMouse() {
     kostka_click()
 }
 </script>
+
 <template>
     <h1 class="sr-only">Gra planszowa - poziom 1</h1>
     <div class="tlo2" role="img" aria-label="gra planszowa - poziom1"></div>
@@ -553,7 +528,9 @@ function clickWithMouse() {
         :ifButtonOnFocusQuizz1="ifQuizzFocusOn" />
 
 </template>
+
 <style scoped>
+
 .tlo2 {
     background-image: url("../assets/plansza_poziom1.png");
     background-size: 1920px 1080px;
@@ -611,7 +588,6 @@ function clickWithMouse() {
     left: 1133px;
     z-index: 0;
 }
-
 
 .pionek1 {
     background-image: url("../assets/pionek1.png");
@@ -759,8 +735,6 @@ function clickWithMouse() {
 /* The animation code */
 @keyframes example {
 
-    /* from {background-color: red;}
-  to {background-color: yellow;} */
     from {
         opacity: 0;
     }

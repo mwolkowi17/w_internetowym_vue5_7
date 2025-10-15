@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted, useTemplateRef, nextTick } from 'vue';
+import { onMounted, useTemplateRef } from 'vue';
 
 defineEmits(['koniec-pulapka', 'koniec-pulapka-focus']);
 

@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted,  useTemplateRef, nextTick  } from 'vue';
+import { ref, onMounted, useTemplateRef, nextTick } from 'vue';
 import { Quests2 } from '../lib/quests-source2.js';
 
 defineOptions({
@@ -18,13 +18,10 @@ const pytanieWidok = useTemplateRef('pytanie1')
 const odpowiedzWidok = useTemplateRef('info')
 
 onMounted(() => {
-    // const elementToFocus = document.querySelector(".pytanie1")
-    // if (elementToFocus && props.ifButtonOnFocusQuizz2) {
-    //     elementToFocus.focus();
-    // }
-   if (props.ifButtonOnFocusQuizz2 === true) {
-    pytanieWidok.value.focus();
-  }
+
+    if (props.ifButtonOnFocusQuizz2 === true) {
+        pytanieWidok.value.focus();
+    }
 })
 
 const emit = defineEmits(['koniec-quizz', 'koniec-quizz-focus',
@@ -36,8 +33,6 @@ console.log(props.msg);
 console.log(props.miejsceNaPlanszy);
 
 const quizz_assets_data = new Quests2();
-
-
 
 const is_krzyzyk1 = ref(false);
 const is_krzyzyk2 = ref(false);
@@ -127,7 +122,7 @@ function zaznaczenie3() {
     }
 }
 
- async function sprawdzOdpowiedz() {
+async function sprawdzOdpowiedz() {
     console.log("Sprawdzam odpowiedź");
     if (czy_odpowiedz_poprawna.value) {
         console.log("Odpowiedź poprawna!!!!");
@@ -140,25 +135,13 @@ function zaznaczenie3() {
         const sound_dobrze = new Audio(new URL('../assets/Dobra_odp.mp3', import.meta.url).href);
         sound_dobrze.play();
 
-        // const buttonVis = new Promise((resolve, reject) => {
-        //     setTimeout(() => {
-        //         resolve(document.querySelector(".info"))
-        //     }, 300);
-        // })
-        // if (ifButtonKoniecQuizzuOnFocus.value === true) {
-        //     buttonVis.then((res) => { res.focus() })
-        // }
-
         await nextTick()
 
-    
-    
-    console.log(odpowiedzWidok.value)
-  
-    
-    if(odpowiedzWidok&&ifButtonKoniecQuizzuOnFocus.value===true){
-      odpowiedzWidok.value.focus()
-    }
+        console.log(odpowiedzWidok.value)
+
+        if (odpowiedzWidok && ifButtonKoniecQuizzuOnFocus.value === true) {
+            odpowiedzWidok.value.focus()
+        }
 
     } else {
         console.log("Odpowiedź zła!!!!");
@@ -172,22 +155,12 @@ function zaznaczenie3() {
         sound_zle.play();
         emit('odejmij-szanse');
 
-        // const buttonVis2 = new Promise((resolve, reject) => {
-        //     setTimeout(() => {
-        //         resolve(document.querySelector(".info"))
-        //     }, 300);
-        // })
-        // if (ifButtonKoniecQuizzuOnFocus.value === true) {
-        //     buttonVis2.then((res) => { res.focus() })
-        // }
+        await nextTick()
+        console.log(odpowiedzWidok.value)
 
-          await nextTick()
-      console.log(odpowiedzWidok.value)
-  
-    
-    if(odpowiedzWidok&&ifButtonKoniecQuizzuOnFocus.value===true){
-      odpowiedzWidok.value.focus()
-    }
+        if (odpowiedzWidok && ifButtonKoniecQuizzuOnFocus.value === true) {
+            odpowiedzWidok.value.focus()
+        }
     }
 }
 
@@ -198,8 +171,9 @@ function zaznaczenie3() {
         <h1 class="sr-only">Quizz</h1>
     </div>
 
-    <!-- <div class="planszaQuizz1 " :class="eksp1[9]"></div> -->
-    <p class="pytanie1" ref="pytanie1" tabindex="0" :aria-label="quizz_assets_data.pokaz_zadanie_2(props.miejsceNaPlanszy).tresc">{{ quizz_assets_data.pokaz_zadanie_2(props.miejsceNaPlanszy).tresc }}</p>
+    <p class="pytanie1" ref="pytanie1" tabindex="0"
+        :aria-label="quizz_assets_data.pokaz_zadanie_2(props.miejsceNaPlanszy).tresc">{{
+            quizz_assets_data.pokaz_zadanie_2(props.miejsceNaPlanszy).tresc }}</p>
     <ul class="lista-odpowiedzi" role="list">
         <li>
             <div class="pojedyncza-odpowiedz" role="checkbox" tabindex="0" :aria-checked="zaznaczenieOdpowiedzi1"
@@ -278,9 +252,9 @@ function zaznaczenie3() {
         $emit('koniec-quizz')" @keydown.enter="if_odpowiedz_dobrze = false,
             if_button_dalej_dobrze = false, $emit('koniec-quizz-focus')" role="button">Dalej</button>
     <div class="plansza-zle" v-if="if_odpowiedz_zle">
-         <div class="info" ref="info" tabindex="0" aria-label="Źle! Błędna odpowiedź. Tracisz jedną szansę">
-        <p class="naglowek-after-quizz naglowek-zle">Źle!</p>
-        <p class="napis-odpowiedz napis-zle">Błędna odpowiedź.</p>
+        <div class="info" ref="info" tabindex="0" aria-label="Źle! Błędna odpowiedź. Tracisz jedną szansę">
+            <p class="naglowek-after-quizz naglowek-zle">Źle!</p>
+            <p class="napis-odpowiedz napis-zle">Błędna odpowiedź.</p>
         </div>
     </div>
     <button class="button-dalej-dobrze my-button anim1" v-if="if_button_dalej_zle" @click="if_odpowiedz_zle = false,
@@ -370,7 +344,7 @@ function zaznaczenie3() {
 }
 
 .pytanie1:focus {
-      outline: 2px solid #000000 !important;
+    outline: 2px solid #000000 !important;
 }
 
 ul {
@@ -401,14 +375,12 @@ li {
 }
 
 .pole-zazn {
-    /* background-image: url("../assets/kratka.png");
-    background-size: 50px 50px;
-    background-repeat: no-repeat; */
+
     border: rgb(29, 56, 80) solid 2px;
     height: 81px;
     width: 81px;
     margin-right: 1rem;
-    /* position: absolute; */
+
 }
 
 .pole-zazn:hover {
@@ -416,8 +388,7 @@ li {
 }
 
 .pole-zazn:focus {
-    /* outline: thick double #08e926 !important; */
-     outline: 2px solid #000000 !important;
+    outline: 2px solid #000000 !important;
 }
 
 .pole1 {
@@ -541,7 +512,7 @@ li {
 .button-dalej:focus {
 
     outline: 5px solid #000000 !important;
-  outline-offset: 10px;
+    outline-offset: 10px;
 }
 
 .plansza-dobrze {
@@ -555,16 +526,16 @@ li {
     top: 275px;
 }
 
-.info{
-  height: 273px;
-  width: 812px;
-  position: absolute;
-  left: 200px;
-  top: 50px;
+.info {
+    height: 273px;
+    width: 812px;
+    position: absolute;
+    left: 200px;
+    top: 50px;
 }
 
-.info:focus{
-  outline: 2px solid #ffffff !important;
+.info:focus {
+    outline: 2px solid #ffffff !important;
 }
 
 .plansza-zle {
@@ -584,7 +555,7 @@ li {
     font-style: bold;
     font-weight: 600;
     font-family: "Proxima Nova", sans-serif;
-   top: -90px;
+    top: -90px;
 
     height: 88px;
     width: 333px;
@@ -593,11 +564,11 @@ li {
 }
 
 .naglowek-dobrze {
-     left: 230px;
+    left: 230px;
 }
 
 .naglowek-zle {
-      left: 330px;
+    left: 330px;
 }
 
 .napis-odpowiedz {
@@ -607,7 +578,7 @@ li {
     font-weight: 400;
     font-family: "Proxima Nova", sans-serif;
     white-space: nowrap;
-   top: 80px;
+    top: 80px;
 
     height: 88px;
     width: 333px;
@@ -616,15 +587,14 @@ li {
 }
 
 .napis-dobrze {
-  left: 50px;
+    left: 50px;
 }
 
 .napis-zle {
-  left:130px;
+    left: 130px;
 }
 
 .button-dalej-dobrze {
-    /* background-image: url("../assets/przycisk_dalej_imie.png"); */
     color: rgb(29, 56, 80);
     font-size: 80px;
     font-style: bold;
@@ -646,15 +616,14 @@ li {
 }
 
 .button-dalej-dobrze:focus {
-   outline: 5px solid #ffffff !important;
-  outline-offset: 10px;
+    outline: 5px solid #ffffff !important;
+    outline-offset: 10px;
 }
 
 /* The animation code */
 @keyframes example {
 
-    /* from {background-color: red;}
-  to {background-color: yellow;} */
+
     from {
         opacity: 0;
     }

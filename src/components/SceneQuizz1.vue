@@ -17,10 +17,7 @@ const ifButtonKoniecQuizzuOnFocus = ref(false)
 const pytanieWidok = useTemplateRef('pytanie1')
 const odpowiedzWidok = useTemplateRef('info')
 onMounted(() => {
-  // const elementToFocus = document.querySelector(".pytanie1")
-  // if (elementToFocus && props.ifButtonOnFocusQuizz1 === true) {
-  //   elementToFocus.focus();
-  // }
+  
   if (props.ifButtonOnFocusQuizz1 === true) {
     pytanieWidok.value.focus();
   }
@@ -113,22 +110,11 @@ async function sprawdzOdpowiedz() {
     const sound_dobrze = new Audio(new URL('../assets/Dobra_odp.mp3', import.meta.url).href);
     sound_dobrze.play()
 
-    // const buttonVis = new Promise((resolve, reject) => {
-    //   setTimeout(() => {
-    //     resolve(document.querySelector(".info"))
-    //   }, 300);
-    // })
-    // if (ifButtonKoniecQuizzuOnFocus.value === true) {
-    //   buttonVis.then((res) => { res.focus() })
-    // }
     await nextTick()
 
-    
-    
     console.log(odpowiedzWidok.value)
-  
-    
-    if(odpowiedzWidok&&ifButtonKoniecQuizzuOnFocus.value===true){
+
+    if (odpowiedzWidok && ifButtonKoniecQuizzuOnFocus.value === true) {
       odpowiedzWidok.value.focus()
     }
   } else {
@@ -142,19 +128,9 @@ async function sprawdzOdpowiedz() {
     sound_zle.play();
     emit('odejmij-szanse');
 
-    // const buttonVis2 = new Promise((resolve, reject) => {
-    //   setTimeout(() => {
-    //     resolve(document.querySelector(".info"))
-    //   }, 300);
-    // })
-    // if (ifButtonKoniecQuizzuOnFocus.value === true) {
-    //   buttonVis2.then((res) => { res.focus() })
-    // }
-     await nextTick()
-      console.log(odpowiedzWidok.value)
-  
-    
-    if(odpowiedzWidok&&ifButtonKoniecQuizzuOnFocus.value===true){
+    await nextTick()
+    console.log(odpowiedzWidok.value)
+    if (odpowiedzWidok && ifButtonKoniecQuizzuOnFocus.value === true) {
       odpowiedzWidok.value.focus()
     }
   }
@@ -194,12 +170,13 @@ const pytanieToDisplay = (miejsce) => {
     role="img" alt="tło" aria-label="pytanie">
     <h1 class="sr-only">Quizz</h1>
   </div>
-  <p class="pytanie1" ref="pytanie1" v-html="pytanieToDisplay(props.miejsceNaPlanszy)" tabindex="0"  :aria-label="quizz_assets_data.pokaz_zadanie_2(props.miejsceNaPlanszy).trescAria"></p>
+  <p class="pytanie1" ref="pytanie1" v-html="pytanieToDisplay(props.miejsceNaPlanszy)" tabindex="0"
+    :aria-label="quizz_assets_data.pokaz_zadanie_2(props.miejsceNaPlanszy).trescAria"></p>
 
   <!-- <ul class="lista-odpowiedzi" role="presentation"> -->
   <ul class="lista-odpowiedzi" role="list">
     <li>
-      <!-- <div class="pojedyncza-odpowiedz" role="checkbox" tabindex="0" :aria-checked={zaznaczenieOdpowiedzi1}> -->
+
       <div class="pojedyncza-odpowiedz" role="checkbox" tabindex="0" :aria-checked="zaznaczenieOdpowiedzi1" @click="is_krzyzyk1 = true,
         is_krzyzyk2 = false,
         if_button_dalej = true,
@@ -217,7 +194,6 @@ const pytanieToDisplay = (miejsce) => {
     </li>
 
     <li>
-      <!-- <div class="pojedyncza-odpowiedz" role="checkbox" tabindex="0" :aria-checked={zaznaczenieOdpowiedzi1}> -->
       <div class="pojedyncza-odpowiedz" role="checkbox" tabindex="0" :aria-checked="zaznaczenieOdpowiedzi2" @click="is_krzyzyk2 = true,
         is_krzyzyk1 = false,
         if_button_dalej = true,
@@ -260,9 +236,9 @@ const pytanieToDisplay = (miejsce) => {
     $emit('koniec-quizz')" @keydown.enter="
       $emit('koniec-quizz-focus'),
       if_odpowiedz_zle = false,
-      if_button_dalej_zle = false
-
-      " role="button">Dalej</button>
+      if_button_dalej_zle = false" 
+      role="button">Dalej
+  </button>
 
 </template>
 <style scoped>

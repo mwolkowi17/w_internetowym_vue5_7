@@ -89,8 +89,6 @@ function change_level_one_choiseFocusOn() {
     }, 500)
 }
 
-
-
 function change_level_two_choise() {
     console.log("wybrano poziom 2")
     if_level_one_choise.value = false;
@@ -118,8 +116,6 @@ function koniec_etapu1() {
     ifMain1FocusOn.value = false
     if (if_main1.value) {
         if_main1.value = true;
-        //if_level_two_choise.value = true;
-
         if_end_scene_level_one.value = true;
     } else {
         if_win.value = true;
@@ -132,7 +128,6 @@ function koniec_etapu1_focus() {
     ifMain1FocusOn.value = false
     if (if_main1.value) {
         if_main1.value = true;
-        //if_level_two_choise.value = true;
         setTimeout(() => {
             if_end_scene_level_one.value = true;
         })

@@ -198,7 +198,7 @@ async function kostka_click() {
     //!!============================ruch pionka loop =========================================
     const myLoopPionek = (arg_A, arg_B, arg_C) => {
         //  create a loop function
-        setTimeout(function () {
+        setTimeout(async function () {
             //  call a 1s setTimeout when the loop is called
 
             pionek_left.value = arg_B[arg_C.value + i][0]
@@ -207,6 +207,11 @@ async function kostka_click() {
             //console.log(arg_B)
             console.log(arg_C.value)
             console.log(arg_B[arg_C.value + i])
+
+             //efekt dźwiękowy ruchu pionka
+            const sound_ruch = new Audio(new URL('../assets/ruch_pionka.mp3', import.meta.url).href);
+            await nextTick()
+            sound_ruch.play()
 
             if (ruch_lokalny >= 15) {
                 console.log("Zwycięstwo!");

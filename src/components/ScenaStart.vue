@@ -12,10 +12,11 @@ const stageParent = ref(null)
 
 <template>
   <div ref="stageParent" class="tlo" role="img" alt="plansza startu gry" aria-label="W internetowym labiryncie">
-      <h1 class="sr-only">W interntowym labiryncie</h1>
+    <h1 class="sr-only">W interntowym labiryncie</h1>
+    <button class="start my-button" @click="$emit('koniec-planszy')" @keydown.enter="$emit('instrukcja-focus')"
+      role="button" aria-label="Gra edukacyjna - uruchom grę">Start</button>
   </div>
-  <button class="start my-button" @click="$emit('koniec-planszy')" @keydown.enter="$emit('instrukcja-focus')"
-    role="button">Start</button>
+
 </template>
 
 <style scoped>
@@ -33,7 +34,7 @@ const stageParent = ref(null)
   position: absolute;
 }
 
-.sr-only{
+.sr-only {
   position: absolute;
   width: 1px;
   height: 1px;

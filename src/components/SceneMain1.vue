@@ -126,6 +126,9 @@ const liczba_wpadek = ref(0)
 
 const wyrzuconaWartoscKostki = ref("Kostka - liczba oczek: " + (x + 1));
 
+let sound_ruch = new Audio(new URL('../assets/ruch_pionka.mp3', import.meta.url).href);
+sound_ruch.preload="auto";
+
 async function kostka_click() {
 
     if_ruch_gracza.value = true
@@ -189,9 +192,13 @@ async function kostka_click() {
     //!!============================ruch pionka loop =========================================
     const myLoopPionek = (arg_A, arg_B, arg_C) => {
         //  loop function
-        setTimeout(function () {
+        setTimeout(async function () {
             //  call a 1s setTimeout when the loop is called
-
+              //efekt dźwiękowy ruchu pionka
+            sound_ruch = new Audio(new URL('../assets/ruch_pionka.mp3', import.meta.url).href);
+            await nextTick()
+            sound_ruch.play()
+            await nextTick()
             pionek_left.value = arg_B[arg_C.value + i][0]
             pionek_top.value = arg_B[arg_C.value + i][1]
 
@@ -201,6 +208,8 @@ async function kostka_click() {
 
             console.log(arg_C.value)
             console.log(arg_B[arg_C.value + i])
+
+          
 
             if (ruch_lokalny >= 15) {
                 console.log("Zwycięstwo!");

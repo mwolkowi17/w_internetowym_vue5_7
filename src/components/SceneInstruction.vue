@@ -38,7 +38,12 @@ const textToDisplayCzytnik= "Znajdujesz się w Wirtualnej Dżungli - aby ją prz
   "czeka Cię pytanie."+ " Każda błędna odpowiedź - to strata 1 szansy. Utrata wszystkich szans" +
   " oznacza zakończenie gry. Dobra odpowiedź - to kolejny rzut kostką." +
   " Po drodze czekają Cię zasadzki, kryjące się na polach oznaczonych" +
-  " wykrzyknikiem. Powodzenia"
+  " wykrzyknikiem."+
+  " Po grze możesz poruszać się za pomocą klawiszy TAB, kombinacji klawiszy Shift i TAB oraz klawisza Enter, którym zatwierdzasz swój wybór"+
+  " W grze usłyszysz także sygnały dźwiękowe, oznaczające odpowiednio ruch pionka, prawidłową lub złą odpwiedź, wygraną etapu lub wygraną całej gry oraz dźwięk"+
+   "informujący cię o przegranej"
+  " Powodzenia"
+  //dodać informacje dla osób niewidzących
 
 </script>
 <template>

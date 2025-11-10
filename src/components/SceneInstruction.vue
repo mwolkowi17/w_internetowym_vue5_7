@@ -38,8 +38,8 @@ const textToDisplay3 =
 
 const textToDisplay4 =
   "Poprawna odpowiedź – rzucasz kostką ponownie. Niepoprawna odpowiedź" +
-  "– tracisz jedną szansę. Jeśli wygrasz poziom 1, to otrzymujesz dodatkową szansę." +
-  "Utrata wszystkich szans oznacza koniec gry. Powodzenia!";
+  " – tracisz jedną szansę. Jeśli wygrasz poziom 1, to otrzymujesz dodatkową szansę." +
+  " Utrata wszystkich szans oznacza koniec gry. Powodzenia!";
 
 const textToDisplayCzytnik =
   "Zasady gry " +

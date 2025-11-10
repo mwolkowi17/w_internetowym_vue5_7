@@ -1,30 +1,32 @@
 <script setup>
-import { ref, onMounted, useTemplateRef, nextTick } from 'vue';
-import { Quests } from '../lib/quests-source.js';
+import { ref, onMounted, useTemplateRef, nextTick } from "vue";
+import { Quests } from "../lib/quests-source.js";
 
 defineOptions({
-  inheritAttrs: false
-})
+  inheritAttrs: false,
+});
 
 const props = defineProps({
   miejsceNaPlanszy: Number,
   msg: String,
-  ifButtonOnFocusQuizz1: Boolean
+  ifButtonOnFocusQuizz1: Boolean,
 });
 
-const ifButtonKoniecQuizzuOnFocus = ref(false)
+const ifButtonKoniecQuizzuOnFocus = ref(false);
 
-const pytanieWidok = useTemplateRef('pytanie1')
-const odpowiedzWidok = useTemplateRef('info')
+const pytanieWidok = useTemplateRef("pytanie1");
+const odpowiedzWidok = useTemplateRef("info");
 onMounted(() => {
-  
   if (props.ifButtonOnFocusQuizz1 === true) {
     pytanieWidok.value.focus();
   }
-})
+});
 
-const emit = defineEmits(['koniec-quizz', 'koniec-quizz-focus',
-  'odejmij-szanse']);
+const emit = defineEmits([
+  "koniec-quizz",
+  "koniec-quizz-focus",
+  "odejmij-szanse",
+]);
 
 let nr_zestawu = Math.floor(Math.random() * 2);
 
@@ -32,8 +34,6 @@ console.log(props.msg);
 console.log(props.miejsceNaPlanszy);
 
 const quizz_assets_data = new Quests();
-
-
 
 const is_krzyzyk1 = ref(false);
 const is_krzyzyk2 = ref(false);
@@ -46,9 +46,8 @@ const czy_odpowiedz_poprawna = ref(false);
 const czy_odpowiedz_zla = ref(false);
 
 //czy zaznaczone
-const zaznaczenieOdpowiedzi1 = ref(false)
-const zaznaczenieOdpowiedzi2 = ref(false)
-
+const zaznaczenieOdpowiedzi1 = ref(false);
+const zaznaczenieOdpowiedzi2 = ref(false);
 
 const eksp1 = [
   "planszaQuizz1nr1",
@@ -60,41 +59,48 @@ const eksp1 = [
   "planszaQuizz1nr7",
   "planszaQuizz1nr8",
   "planszaQuizz1nr9",
-  "planszaQuizz1nr10"
-]
+  "planszaQuizz1nr10",
+];
 
 function zaznaczenie1() {
   console.log("Zaznaczenie 1");
-  if (quizz_assets_data.pokaz_zadanie_2(props.miejsceNaPlanszy).odpowiedz_text[nr_zestawu][2] === 1) {
+  if (
+    quizz_assets_data.pokaz_zadanie_2(props.miejsceNaPlanszy).odpowiedz_text[
+      nr_zestawu
+    ][2] === 1
+  ) {
     console.log("Odpowiedź poprawna");
     czy_odpowiedz_poprawna.value = true;
     czy_odpowiedz_zla.value = false;
-    zaznaczenieOdpowiedzi1.value = true
-    zaznaczenieOdpowiedzi2.value = false
-
+    zaznaczenieOdpowiedzi1.value = true;
+    zaznaczenieOdpowiedzi2.value = false;
   } else {
     console.log("Odpowiedź zła");
     czy_odpowiedz_poprawna.value = false;
     czy_odpowiedz_zla.value = true;
-    zaznaczenieOdpowiedzi1.value = true
-    zaznaczenieOdpowiedzi2.value = false
+    zaznaczenieOdpowiedzi1.value = true;
+    zaznaczenieOdpowiedzi2.value = false;
   }
 }
 
 function zaznaczenie2() {
   console.log("Zaznaczenie 2");
-  if (quizz_assets_data.pokaz_zadanie_2(props.miejsceNaPlanszy).odpowiedz_text[nr_zestawu][2] === 2) {
+  if (
+    quizz_assets_data.pokaz_zadanie_2(props.miejsceNaPlanszy).odpowiedz_text[
+      nr_zestawu
+    ][2] === 2
+  ) {
     console.log("Odpowiedź poprawna");
     czy_odpowiedz_poprawna.value = true;
     czy_odpowiedz_zla.value = false;
-    zaznaczenieOdpowiedzi1.value = false
-    zaznaczenieOdpowiedzi2.value = true
+    zaznaczenieOdpowiedzi1.value = false;
+    zaznaczenieOdpowiedzi2.value = true;
   } else {
     console.log("Odpowiedź zła");
     czy_odpowiedz_poprawna.value = false;
     czy_odpowiedz_zla.value = true;
-    zaznaczenieOdpowiedzi1.value = false
-    zaznaczenieOdpowiedzi2.value = true
+    zaznaczenieOdpowiedzi1.value = false;
+    zaznaczenieOdpowiedzi2.value = true;
   }
 }
 
@@ -107,15 +113,17 @@ async function sprawdzOdpowiedz() {
     if_button_dalej.value = false;
     is_krzyzyk1.value = false;
     is_krzyzyk2.value = false;
-    const sound_dobrze = new Audio(new URL('../assets/Dobra_odp.mp3', import.meta.url).href);
-    sound_dobrze.play()
+    const sound_dobrze = new Audio(
+      new URL("../assets/Dobra_odp.mp3", import.meta.url).href
+    );
+    sound_dobrze.play();
 
-    await nextTick()
+    await nextTick();
 
-    console.log(odpowiedzWidok.value)
+    console.log(odpowiedzWidok.value);
 
     if (odpowiedzWidok && ifButtonKoniecQuizzuOnFocus.value === true) {
-      odpowiedzWidok.value.focus()
+      odpowiedzWidok.value.focus();
     }
   } else {
     console.log("Odpowiedź zła!!!!");
@@ -124,126 +132,226 @@ async function sprawdzOdpowiedz() {
     if_button_dalej.value = false;
     is_krzyzyk1.value = false;
     is_krzyzyk2.value = false;
-    const sound_zle = new Audio(new URL('../assets/zla_odp.mp3', import.meta.url).href);
+    const sound_zle = new Audio(
+      new URL("../assets/zla_odp.mp3", import.meta.url).href
+    );
     sound_zle.play();
-    emit('odejmij-szanse');
+    emit("odejmij-szanse");
 
-    await nextTick()
-    console.log(odpowiedzWidok.value)
+    await nextTick();
+    console.log(odpowiedzWidok.value);
     if (odpowiedzWidok && ifButtonKoniecQuizzuOnFocus.value === true) {
-      odpowiedzWidok.value.focus()
+      odpowiedzWidok.value.focus();
     }
   }
 }
 
-const klodka1image = new URL('../assets/klodka1.png', import.meta.url).href
-const buzka1image = new URL('../assets/buzka1.png', import.meta.url).href
-const malpa1image = new URL('../assets/malpa1.png', import.meta.url).href
+const klodka1image = new URL("../assets/klodka1.png", import.meta.url).href;
+const buzka1image = new URL("../assets/buzka1.png", import.meta.url).href;
+const malpa1image = new URL("../assets/malpa1.png", import.meta.url).href;
 
 const pytanieToDisplay = (miejsce) => {
-  let textToDisplayPytanie
+  let textToDisplayPytanie;
   if (miejsce === 1) {
-    textToDisplayPytanie = "<span>" + quizz_assets_data.pokaz_zadanie_2(miejsce).tresc + "</span>" + "<img class='klodka2' src=" + klodka1image + ">"
-      + "<span>oznacza połączenie:</span>"
+    textToDisplayPytanie =
+      "<span>" +
+      quizz_assets_data.pokaz_zadanie_2(miejsce).tresc +
+      "</span>" +
+      "<img class='klodka2' src=" +
+      klodka1image +
+      ">" +
+      "<span>oznacza połączenie:</span>";
+  } else if (miejsce === 7) {
+    textToDisplayPytanie =
+      "<span>" +
+      quizz_assets_data.pokaz_zadanie_2(miejsce).tresc +
+      "</span>" +
+      "<img class='buzka2' src=" +
+      buzka1image +
+      ">" +
+      "<span>wyraża:</span>";
+  } else if (miejsce === 10) {
+    textToDisplayPytanie =
+      "<span>" +
+      quizz_assets_data.pokaz_zadanie_2(miejsce).tresc +
+      "</span>" +
+      "<img class='malpa2' src=" +
+      malpa1image +
+      ">" +
+      "<span>używa się w adresie:</span>";
+  } else if (miejsce === 12) {
+    textToDisplayPytanie =
+      "<span>" +
+      quizz_assets_data.pokaz_zadanie_2(miejsce).tresc +
+      "</span>" +
+      "<img class='malpa3' src=" +
+      malpa1image +
+      " aria-label='małpa'>" +
+      "<span>oznacza:</span>";
+  } else {
+    textToDisplayPytanie =
+      "<span>" + quizz_assets_data.pokaz_zadanie_2(miejsce).tresc + "</span>";
   }
-  else if (miejsce === 7) {
-    textToDisplayPytanie = "<span>" + quizz_assets_data.pokaz_zadanie_2(miejsce).tresc + "</span>" + "<img class='buzka2' src=" + buzka1image + ">"
-      + "<span>wyraża:</span>"
-  }
-  else if (miejsce === 10) {
-    textToDisplayPytanie = "<span>" + quizz_assets_data.pokaz_zadanie_2(miejsce).tresc + "</span>" + "<img class='malpa2' src=" + malpa1image + ">"
-      + "<span>używa się w adresie:</span>"
-  }
-  else if (miejsce === 12) {
-    textToDisplayPytanie = "<span>" + quizz_assets_data.pokaz_zadanie_2(miejsce).tresc + "</span>" + "<img class='malpa3' src=" + malpa1image + " aria-label='małpa'>"
-      + "<span>oznacza:</span>"
-  }
-  else {
-    textToDisplayPytanie = "<span>" + quizz_assets_data.pokaz_zadanie_2(miejsce).tresc + "</span>"
-  }
-  return textToDisplayPytanie
-}
-
+  return textToDisplayPytanie;
+};
 </script>
 <template>
-  <div class="planszaQuizz1 " :class="eksp1[quizz_assets_data.pokaz_zadanie_2(props.miejsceNaPlanszy).pytanie]"
-    role="img" alt="tło" aria-label="pytanie">
+  <div
+    class="planszaQuizz1"
+    :class="
+      eksp1[quizz_assets_data.pokaz_zadanie_2(props.miejsceNaPlanszy).pytanie]
+    "
+    role="img"
+    alt="tło"
+    aria-label="pytanie"
+  >
     <h1 class="sr-only">Quizz</h1>
   </div>
-  <p class="pytanie1" ref="pytanie1" v-html="pytanieToDisplay(props.miejsceNaPlanszy)" tabindex="0"
-    :aria-label="quizz_assets_data.pokaz_zadanie_2(props.miejsceNaPlanszy).trescAria"></p>
+  <p
+    class="pytanie1"
+    ref="pytanie1"
+    v-html="pytanieToDisplay(props.miejsceNaPlanszy)"
+    tabindex="0"
+    :aria-label="
+      quizz_assets_data.pokaz_zadanie_2(props.miejsceNaPlanszy).trescAria
+    "
+  ></p>
 
   <!-- <ul class="lista-odpowiedzi" role="presentation"> -->
   <ul class="lista-odpowiedzi" role="list">
     <li>
-
-      <div class="pojedyncza-odpowiedz" role="checkbox" tabindex="0" :aria-checked="zaznaczenieOdpowiedzi1" @click="is_krzyzyk1 = true,
-        is_krzyzyk2 = false,
-        if_button_dalej = true,
-        zaznaczenie1()" @keydown.enter="is_krzyzyk1 = true,
-          is_krzyzyk2 = false,
-          if_button_dalej = true,
-          zaznaczenie1()">
-        <span class="krzyzyk" :class="{ 'krzyzyk1': is_krzyzyk1, 'krzyzyk2': is_krzyzyk2 }"
-          alt="zaznaczenie odpowiedzi"></span>
+      <div
+        class="pojedyncza-odpowiedz"
+        role="checkbox"
+        tabindex="0"
+        :aria-checked="zaznaczenieOdpowiedzi1"
+        @click="
+          (is_krzyzyk1 = true),
+            (is_krzyzyk2 = false),
+            (if_button_dalej = true),
+            zaznaczenie1()
+        "
+        @keydown.enter="
+          (is_krzyzyk1 = true),
+            (is_krzyzyk2 = false),
+            (if_button_dalej = true),
+            zaznaczenie1()
+        "
+      >
+        <span
+          class="krzyzyk"
+          :class="{ krzyzyk1: is_krzyzyk1, krzyzyk2: is_krzyzyk2 }"
+          alt="zaznaczenie odpowiedzi"
+        ></span>
         <span class="pole-zazn anim1" aria-label="zaznacz odpowiedź 1"></span>
 
         <span class="odpowiedz anim1">{{
-          quizz_assets_data.pokaz_zadanie_2(props.miejsceNaPlanszy).odpowiedz_text[nr_zestawu][0] }}</span>
+          quizz_assets_data.pokaz_zadanie_2(props.miejsceNaPlanszy)
+            .odpowiedz_text[nr_zestawu][0]
+        }}</span>
       </div>
     </li>
 
     <li>
-      <div class="pojedyncza-odpowiedz" role="checkbox" tabindex="0" :aria-checked="zaznaczenieOdpowiedzi2" @click="is_krzyzyk2 = true,
-        is_krzyzyk1 = false,
-        if_button_dalej = true,
-        zaznaczenie2()" @keydown.enter="is_krzyzyk2 = true,
-          is_krzyzyk1 = false,
-          if_button_dalej = true,
-          zaznaczenie2()">
+      <div
+        class="pojedyncza-odpowiedz"
+        role="checkbox"
+        tabindex="0"
+        :aria-checked="zaznaczenieOdpowiedzi2"
+        @click="
+          (is_krzyzyk2 = true),
+            (is_krzyzyk1 = false),
+            (if_button_dalej = true),
+            zaznaczenie2()
+        "
+        @keydown.enter="
+          (is_krzyzyk2 = true),
+            (is_krzyzyk1 = false),
+            (if_button_dalej = true),
+            zaznaczenie2()
+        "
+      >
         <span class="pole-zazn anim1" aria-label="zaznacz odpowiedź 2"></span>
         <span class="odpowiedz anim1">{{
-          quizz_assets_data.pokaz_zadanie_2(props.miejsceNaPlanszy).odpowiedz_text[nr_zestawu][1] }}</span>
-
+          quizz_assets_data.pokaz_zadanie_2(props.miejsceNaPlanszy)
+            .odpowiedz_text[nr_zestawu][1]
+        }}</span>
       </div>
     </li>
   </ul>
 
-  <button class="button-dalej my-button" v-if="if_button_dalej" @click="sprawdzOdpowiedz()"
-    @keydown.enter="ifButtonKoniecQuizzuOnFocus = true; sprawdzOdpowiedz()" role="button" alt="przycisk sprawdź">Sprawdź
-    odpowiedź</button>
+  <button
+    class="button-dalej my-button"
+    v-if="if_button_dalej"
+    @click="sprawdzOdpowiedz()"
+    @keydown.enter="
+      ifButtonKoniecQuizzuOnFocus = true;
+      sprawdzOdpowiedz();
+    "
+    role="button"
+    alt="przycisk sprawdź"
+  >
+    Sprawdź odpowiedź
+  </button>
   <div class="plansza-dobrze" v-if="if_odpowiedz_dobrze">
-    <div class="info" ref="info" tabindex="0" aria-label="Brawo! Prawidłowa odpowiedź.">
+    <div
+      class="info"
+      ref="info"
+      tabindex="0"
+      aria-label="Brawo! Prawidłowa odpowiedź."
+    >
       <p class="naglowek-after-quizz naglowek-dobrze">Brawo!</p>
       <p class="napis-odpowiedz napis-dobrze">Prawidłowa odpowiedź.</p>
     </div>
   </div>
-  <button class="button-dalej-dobrze my-button anim1" v-if="if_button_dalej_dobrze" @click="if_odpowiedz_dobrze = false,
-    if_button_dalej_dobrze = false,
-    $emit('koniec-quizz')" @keydown.enter="
+  <button
+    class="button-dalej-dobrze my-button anim1"
+    v-if="if_button_dalej_dobrze"
+    @click="
+      (if_odpowiedz_dobrze = false),
+        (if_button_dalej_dobrze = false),
+        $emit('koniec-quizz')
+    "
+    @keydown.enter="
       $emit('koniec-quizz-focus'),
-      if_odpowiedz_dobrze = false,
-      if_button_dalej_dobrze = false
-      " role="button">Dalej</button>
+        (if_odpowiedz_dobrze = false),
+        (if_button_dalej_dobrze = false)
+    "
+    role="button"
+  >
+    Dalej
+  </button>
   <div class="plansza-zle" v-if="if_odpowiedz_zle">
-    <div class="info" ref="info" tabindex="0" aria-label="Źle! Błędna odpowiedź. Tracisz jedną szansę">
+    <div
+      class="info"
+      ref="info"
+      tabindex="0"
+      aria-label="Źle! Nieprawidłowa odpowiedź. Tracisz jedną szansę"
+    >
       <p class="naglowek-after-quizz naglowek-zle">Źle!</p>
-      <p class="napis-odpowiedz napis-zle">Błędna odpowiedź.</p>
+      <p class="napis-odpowiedz napis-zle">Nieprawidłowa odpowiedź.</p>
     </div>
   </div>
-  <button class="button-dalej-dobrze my-button anim1" v-if="if_button_dalej_zle" @click="if_odpowiedz_zle = false,
-    if_button_dalej_zle = false,
-    $emit('koniec-quizz')" @keydown.enter="
+  <button
+    class="button-dalej-dobrze my-button anim1"
+    v-if="if_button_dalej_zle"
+    @click="
+      (if_odpowiedz_zle = false),
+        (if_button_dalej_zle = false),
+        $emit('koniec-quizz')
+    "
+    @keydown.enter="
       $emit('koniec-quizz-focus'),
-      if_odpowiedz_zle = false,
-      if_button_dalej_zle = false" 
-      role="button">Dalej
+        (if_odpowiedz_zle = false),
+        (if_button_dalej_zle = false)
+    "
+    role="button"
+  >
+    Dalej
   </button>
-
 </template>
 <style scoped>
 .planszaQuizz1 {
-
   background-size: 1411px 896px;
   background-repeat: no-repeat;
   height: 896px;
@@ -305,7 +413,6 @@ const pytanieToDisplay = (miejsce) => {
   background-image: url("../assets/pytanie_puste.png");
 }
 
-
 .pytanie1 {
   color: rgb(29, 56, 80);
   opacity: 1;
@@ -331,37 +438,35 @@ const pytanieToDisplay = (miejsce) => {
    top: 3px;
    left: 294px;  */
   position: relative;
-  margin-right: .1em;
-  margin-left: .1em;
-  margin-top: -.3em;
-  margin-bottom: -.3em;
+  margin-right: 0.1em;
+  margin-left: 0.1em;
+  margin-top: -0.3em;
+  margin-bottom: -0.3em;
 }
 
 .pytanie1:deep(.buzka2) {
   position: relative;
   /* top: 2px;
    left: 555px; */
-  margin-right: .2em;
-  margin-left: .2em;
-  margin-top: -.3em;
-  margin-bottom: -.7em;
-
+  margin-right: 0.2em;
+  margin-left: 0.2em;
+  margin-top: -0.3em;
+  margin-bottom: -0.7em;
 }
 
 .pytanie1:deep(.malpa2) {
   position: relative;
   /* left: 318px; */
-  margin-right: .2em;
-  margin-left: .2em;
-  margin-bottom: -.4em;
+  margin-right: 0.2em;
+  margin-left: 0.2em;
+  margin-bottom: -0.4em;
 }
 
 .pytanie1:deep(.malpa3) {
   position: relative;
-  margin-right: .2em;
-  margin-left: .2em;
-  margin-bottom: -.4em;
-
+  margin-right: 0.2em;
+  margin-left: 0.2em;
+  margin-bottom: -0.4em;
 }
 
 ul {
@@ -384,7 +489,7 @@ li {
 .pojedyncza-odpowiedz {
   display: flex;
   align-items: center;
-  padding: .5rem 1rem;
+  padding: 0.5rem 1rem;
 }
 
 .pojedyncza-odpowiedz:focus {
@@ -402,7 +507,6 @@ li {
   /* width: 1rem; */
   margin-right: 1rem;
   /* position: absolute; */
-
 }
 
 .pole-zazn:hover {
@@ -413,9 +517,6 @@ li {
   /* outline: thick double #08e926 !important; */
   outline: 2px solid #000000 !important;
 }
-
-
-
 
 .krzyzyk {
   background-image: url("../assets/krzyzyk1.png");
@@ -448,7 +549,6 @@ li {
   font-family: "Proxima Nova", sans-serif;
   white-space: nowrap;
   /* position: absolute; */
-
 }
 
 .button-dalej {
@@ -578,14 +678,12 @@ li {
 }
 
 .button-dalej-dobrze:focus {
-
   outline: 5px solid #ffffff !important;
   outline-offset: 10px;
 }
 
 /* The animation code */
 @keyframes example {
-
   /* from {background-color: red;}
   to {background-color: yellow;} */
   from {
@@ -599,7 +697,6 @@ li {
 
 /* The element to apply the animation to */
 .anim1 {
-
   animation-name: example;
   animation-duration: 1s;
 }

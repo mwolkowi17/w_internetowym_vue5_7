@@ -556,47 +556,13 @@ li {
   z-index: 1;
 }
 
-/* nieużywane klasy do usunięcia -  początek*/
-.krzyzyk {
-  background-image: url("../assets/krzyzyk1.png");
-  background-size: 73px 73px;
-  background-repeat: no-repeat;
-  height: 73px;
-  width: 73px;
-  position: absolute;
-  visibility: hidden;
-  z-index: 1;
-}
-
-.krzyzyk1 {
-  top: 15px;
-  left: 62px;
-  visibility: visible;
-}
-
-.krzyzyk2 {
-  top: 135px;
-  left: 62px;
-  visibility: visible;
-}
-
-.krzyzyk3 {
-  top: 255px;
-  left: 62px;
-  visibility: visible;
-}
-
-/* nieużywane klasy do usunięcia - koniec*/
-
 .odpowiedz {
   color: rgb(29, 56, 80);
   font-size: 42px;
   font-style: bold;
   font-weight: 700;
   font-family: "Proxima Nova", sans-serif;
-
   width: 1000px;
-  /* position: absolute; */
 }
 
 .odpowiedz1 {
@@ -681,7 +647,6 @@ li {
   font-weight: 600;
   font-family: "Proxima Nova", sans-serif;
   top: -90px;
-
   height: 88px;
   width: 333px;
   position: absolute;
@@ -704,7 +669,6 @@ li {
   font-family: "Proxima Nova", sans-serif;
   white-space: nowrap;
   top: 80px;
-
   height: 88px;
   width: 333px;
   position: absolute;

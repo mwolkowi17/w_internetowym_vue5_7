@@ -217,7 +217,6 @@ const pytanieToDisplay = (miejsce) => {
     "
   ></p>
 
-  <!-- <ul class="lista-odpowiedzi" role="presentation"> -->
   <ul class="lista-odpowiedzi" role="list">
     <li>
       <div
@@ -434,9 +433,6 @@ const pytanieToDisplay = (miejsce) => {
 }
 
 .pytanie1:deep(.klodka2) {
-  /* position:absolute;
-   top: 3px;
-   left: 294px;  */
   position: relative;
   margin-right: 0.1em;
   margin-left: 0.1em;
@@ -446,8 +442,6 @@ const pytanieToDisplay = (miejsce) => {
 
 .pytanie1:deep(.buzka2) {
   position: relative;
-  /* top: 2px;
-   left: 555px; */
   margin-right: 0.2em;
   margin-left: 0.2em;
   margin-top: -0.3em;
@@ -456,7 +450,6 @@ const pytanieToDisplay = (miejsce) => {
 
 .pytanie1:deep(.malpa2) {
   position: relative;
-  /* left: 318px; */
   margin-right: 0.2em;
   margin-left: 0.2em;
   margin-bottom: -0.4em;
@@ -497,16 +490,10 @@ li {
 }
 
 .pole-zazn {
-  /* background-image: url("../assets/kratka.png");
-  background-size: 50px 50px;
-  background-repeat: no-repeat; */
   border: rgb(29, 56, 80) solid 2px;
   height: 81px;
-  /* height: 1rem; */
   width: 81px;
-  /* width: 1rem; */
   margin-right: 1rem;
-  /* position: absolute; */
 }
 
 .pole-zazn:hover {
@@ -514,7 +501,6 @@ li {
 }
 
 .pole-zazn:focus {
-  /* outline: thick double #08e926 !important; */
   outline: 2px solid #000000 !important;
 }
 
@@ -548,7 +534,6 @@ li {
   font-weight: 700;
   font-family: "Proxima Nova", sans-serif;
   white-space: nowrap;
-  /* position: absolute; */
 }
 
 .button-dalej {
@@ -656,7 +641,6 @@ li {
 }
 
 .button-dalej-dobrze {
-  /* background-image: url("../assets/przycisk_dalej_imie.png"); */
   color: rgb(29, 56, 80);
   font-size: 80px;
   font-style: bold;
@@ -684,12 +668,9 @@ li {
 
 /* The animation code */
 @keyframes example {
-  /* from {background-color: red;}
-  to {background-color: yellow;} */
   from {
     opacity: 0;
   }
-
   to {
     opacity: 100;
   }

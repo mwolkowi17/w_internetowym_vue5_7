@@ -66,12 +66,9 @@ const textToDisplayCzytnik =
       <h1 class="instrukcja-title">Zasady gry</h1>
       <div class="kontener-instrukcja">
         <p class="instrukcja" v-html="textToDisplay"></p>
-        <!-- <img class="gwiazdka" alt="" src="../assets/ikona1gwiazdka.png" />-->
-        <!-- <img class="pytajnik" alt="" src="../assets/ikona2question.png" /> -->
         <p class="instrukcja" v-html="textToDisplay2"></p>
 
         <p class="instrukcja" v-html="textToDisplay3"></p>
-        <!-- <img class="wykrzyknik" alt="" src="../assets/ikona3wykrzyknik.png" /> -->
         <p class="instrukcja" v-html="textToDisplay4"></p>
       </div>
     </div>
@@ -123,11 +120,8 @@ const textToDisplayCzytnik =
 }
 
 .kontener-instrukcja {
-  /* display: flex;
-  align-items: center; */
   display: inline-block;
   padding: 0.5rem 1rem;
-  /* width: 1300px; */
   width: 1400px;
   top: 90px;
   left: 55px;
@@ -147,8 +141,6 @@ const textToDisplayCzytnik =
 
 .gwiazdka {
   position: relative;
-  /* top: 220px;
-  left: 746px; */
   margin-top: -45px;
   margin-right: -95px;
   left: -98px;
@@ -156,13 +148,8 @@ const textToDisplayCzytnik =
 }
 
 .pytajnik {
-  /* position: absolute; */
   top: 283px;
   left: 1355px;
-  /* margin-top: -38px;
-  margin-right: -80px;
-  left: -90px; */
-  /*top: 35px;*/
 }
 
 .kontener-instrukcja :deep(.pytajnik) {
@@ -176,12 +163,6 @@ const textToDisplayCzytnik =
 
 .wykrzyknik {
   position: relative;
-  /* top: 475px;
-  left: 715px; */
-  /* margin-top: -38px;
-  margin-right: -80px;
-  left: -90px; */
-  /* top: 35px;*/
 }
 
 .kontener-instrukcja :deep(.wykrzyknik) {
@@ -204,12 +185,6 @@ const textToDisplayCzytnik =
   width: 301px;
   height: 117px;
   border: 4px solid rgb(0, 187, 255);
-  /* display: flex;
-  align-items: center;
-  justify-content: center;
-  box-sizing: border-box;
-  overflow: hidden;           /* Prevent overflow *
-  transform-origin: center;  */
   transition: 0.2s ease-in-out;
 }
 

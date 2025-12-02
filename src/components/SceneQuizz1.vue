@@ -590,7 +590,7 @@ li {
 
 .info {
   height: 273px;
-  width: 812px;
+  width: 832px;
   position: absolute;
   left: 200px;
   top: 50px;
@@ -652,7 +652,7 @@ li {
 }
 
 .napis-zle {
-  left: 130px;
+  left: 0px;
 }
 
 .button-dalej-dobrze {

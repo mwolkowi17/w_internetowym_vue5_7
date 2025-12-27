@@ -30,8 +30,8 @@ const emit = defineEmits([
 
 let nr_zestawu = Math.floor(Math.random() * 2);
 
-console.log(props.msg);
-console.log(props.miejsceNaPlanszy);
+//console.log(props.msg);
+//console.log(props.miejsceNaPlanszy);
 
 const quizz_assets_data = new Quests();
 
@@ -63,19 +63,19 @@ const eksp1 = [
 ];
 
 function zaznaczenie1() {
-  console.log("Zaznaczenie 1");
+  //console.log("Zaznaczenie 1");
   if (
     quizz_assets_data.pokaz_zadanie_2(props.miejsceNaPlanszy).odpowiedz_text[
       nr_zestawu
     ][2] === 1
   ) {
-    console.log("Odpowiedź poprawna");
+    //console.log("Odpowiedź poprawna");
     czy_odpowiedz_poprawna.value = true;
     czy_odpowiedz_zla.value = false;
     zaznaczenieOdpowiedzi1.value = true;
     zaznaczenieOdpowiedzi2.value = false;
   } else {
-    console.log("Odpowiedź zła");
+    //console.log("Odpowiedź zła");
     czy_odpowiedz_poprawna.value = false;
     czy_odpowiedz_zla.value = true;
     zaznaczenieOdpowiedzi1.value = true;
@@ -84,19 +84,19 @@ function zaznaczenie1() {
 }
 
 function zaznaczenie2() {
-  console.log("Zaznaczenie 2");
+  //console.log("Zaznaczenie 2");
   if (
     quizz_assets_data.pokaz_zadanie_2(props.miejsceNaPlanszy).odpowiedz_text[
       nr_zestawu
     ][2] === 2
   ) {
-    console.log("Odpowiedź poprawna");
+    //console.log("Odpowiedź poprawna");
     czy_odpowiedz_poprawna.value = true;
     czy_odpowiedz_zla.value = false;
     zaznaczenieOdpowiedzi1.value = false;
     zaznaczenieOdpowiedzi2.value = true;
   } else {
-    console.log("Odpowiedź zła");
+    //console.log("Odpowiedź zła");
     czy_odpowiedz_poprawna.value = false;
     czy_odpowiedz_zla.value = true;
     zaznaczenieOdpowiedzi1.value = false;
@@ -105,9 +105,9 @@ function zaznaczenie2() {
 }
 
 async function sprawdzOdpowiedz() {
-  console.log("Sprawdzam odpowiedź");
+  //console.log("Sprawdzam odpowiedź");
   if (czy_odpowiedz_poprawna.value) {
-    console.log("Odpowiedź poprawna!!!!");
+    //console.log("Odpowiedź poprawna!!!!");
     if_odpowiedz_dobrze.value = true;
     if_button_dalej_dobrze.value = true;
     if_button_dalej.value = false;
@@ -120,13 +120,13 @@ async function sprawdzOdpowiedz() {
 
     await nextTick();
 
-    console.log(odpowiedzWidok.value);
+    //console.log(odpowiedzWidok.value);
 
     if (odpowiedzWidok && ifButtonKoniecQuizzuOnFocus.value === true) {
       odpowiedzWidok.value.focus();
     }
   } else {
-    console.log("Odpowiedź zła!!!!");
+    //console.log("Odpowiedź zła!!!!");
     if_odpowiedz_zle.value = true;
     if_button_dalej_zle.value = true;
     if_button_dalej.value = false;
@@ -139,7 +139,7 @@ async function sprawdzOdpowiedz() {
     emit("odejmij-szanse");
 
     await nextTick();
-    console.log(odpowiedzWidok.value);
+    //console.log(odpowiedzWidok.value);
     if (odpowiedzWidok && ifButtonKoniecQuizzuOnFocus.value === true) {
       odpowiedzWidok.value.focus();
     }

@@ -136,15 +136,15 @@ async function kostka_click() {
   let i = 0; //  set your counter to 0
   //========================================================================================
   if_widok_kostki.value = true;
-  console.log("rzut");
+  //console.log("rzut");
 
   //funkcjonalnosc ograniczająca ilośc wpadek
   let wartoscWyrzuconaFirst = metodyPomocnicze.rzucaj();
-  console.log("oczka: " + wartoscWyrzuconaFirst);
+  //console.log("oczka: " + wartoscWyrzuconaFirst);
   await nextTick();
   kostkaOczka.value.focus();
   if (liczba_wpadek.value < 2) {
-    console.log("ilość wpadek: " + liczba_wpadek.value);
+    //console.log("ilość wpadek: " + liczba_wpadek.value);
     liczba_wyrzucona.value = wartoscWyrzuconaFirst;
   }
   if (
@@ -153,7 +153,7 @@ async function kostka_click() {
       krok_gracz1_na_planszy.value + wartoscWyrzuconaFirst + 1
     ) === true
   ) {
-    console.log("zmieniam");
+    //console.log("zmieniam");
 
     if (wartoscWyrzuconaFirst < 5) {
       liczba_wyrzucona.value = wartoscWyrzuconaFirst + 1;
@@ -161,7 +161,7 @@ async function kostka_click() {
       liczba_wyrzucona.value = wartoscWyrzuconaFirst - 1;
     }
   } else {
-    console.log("ilość wpadek powyżej: " + liczba_wpadek.value);
+    //console.log("ilość wpadek powyżej: " + liczba_wpadek.value);
     liczba_wyrzucona.value = wartoscWyrzuconaFirst;
   }
   //========================================koniec funcjonalnosci ograniczającej liczbę wpadek===============================================
@@ -169,7 +169,7 @@ async function kostka_click() {
   x = liczba_wyrzucona.value;
   wyrzuconaWartoscKostki.value = "Kostka - liczba oczek: " + (x + 1);
   let wynik_rzutu = x;
-  console.log(x);
+  //console.log(x);
   for (let i = 0; i < 6; i++) {
     if (i === x) {
       kolekcja_widoków_kostki[i] = true;
@@ -185,7 +185,7 @@ async function kostka_click() {
     isSet6.value = kolekcja_widoków_kostki[5];
   }
 
-  console.log(kolekcja_widoków_kostki);
+  //console.log(kolekcja_widoków_kostki);
 
   //!!============================ruch pionka loop =========================================
   const myLoopPionek = (arg_A, arg_B, arg_C) => {
@@ -206,13 +206,13 @@ async function kostka_click() {
       // pionek_left.value = arg_B[1][0]
       // pionek_top.value = arg_B[1][1]
 
-      console.log(arg_C.value);
-      console.log(arg_B[arg_C.value + i]);
+      //console.log(arg_C.value);
+      //console.log(arg_B[arg_C.value + i]);
 
       if (ruch_lokalny >= 15) {
-        console.log("Zwycięstwo!");
+        //console.log("Zwycięstwo!");
         kontrolka_ruch_na_planszy = false;
-        console.log("wygrałeś!!!");
+        //console.log("wygrałeś!!!");
         wywolanie_sceny_koncowej();
       }
 
@@ -238,22 +238,22 @@ async function kostka_click() {
     //  start the loop
     myLoopPionek(postac1, pozycje_pionka_gracza1, krok_gracz1_na_planszy);
 
-    console.log("krok na planszy: " + krok_gracz1_na_planszy.value);
+    //console.log("krok na planszy: " + krok_gracz1_na_planszy.value);
   }
 
   const pulapka_czy_quizz = async () => {
-    console.log("sprawdzam czy pułapka albo quizz");
-    console.log(i);
-    console.log("wynik rzutu: " + wynik_rzutu);
-    console.log("kontrolka ruch na planszy: " + kontrolka_ruch_na_planszy);
+    //console.log("sprawdzam czy pułapka albo quizz");
+    //console.log(i);
+    //console.log("wynik rzutu: " + wynik_rzutu);
+    //console.log("kontrolka ruch na planszy: " + kontrolka_ruch_na_planszy);
     if (kontrolka_ruch_na_planszy === true) {
-      console.log("pulapka albo quizz!!!");
-      console.log("krok gracza na planszy: " + krok_gracz1_na_planszy.value);
+      //console.log("pulapka albo quizz!!!");
+      //console.log("krok gracza na planszy: " + krok_gracz1_na_planszy.value);
       // sprawdzenie czy gracz wpadł w pułapkę
-      console.log(trap.czy_polapka(krok_gracz1_na_planszy.value));
+      //console.log(trap.czy_polapka(krok_gracz1_na_planszy.value));
       //  tu w momencie kiedy gracz zanjdzie się na polu pułapka będzie go cofało a jak nie to odpala quizz
       if (trap.czy_polapka(krok_gracz1_na_planszy.value) === true) {
-        console.log("wpadka");
+        //console.log("wpadka");
         //dodaje wpadki do licznika wpadek
         liczba_wpadek.value = liczba_wpadek.value + 1;
         //  pokazuje planszę pułapki
@@ -272,7 +272,7 @@ async function kostka_click() {
           sound_cofasz.play();
         }, 1000);
       } else {
-        console.log("quiz");
+        //console.log("quiz");
         setTimeout(() => {
           if_widok_quizz1.value = true;
         }, 1000);
@@ -281,7 +281,7 @@ async function kostka_click() {
   };
 
   const wywolanie_sceny_koncowej = () => {
-    console.log("wywołanie planszy wyboru etapu nr 2");
+    //console.log("wywołanie planszy wyboru etapu nr 2");
     if (ifFocusEmitGlobal.value === false) {
       emit("koniec-etap1");
     }
@@ -305,7 +305,7 @@ const koniecQuizu = () => {
 
   if (krok_gracz1_na_planszy.value === 15) {
     if_rzuc_kostka.value = false;
-    console.log("plansza win level!");
+    //console.log("plansza win level!");
     emit("koniec-etap1");
   }
 };
@@ -327,24 +327,24 @@ const koniecQuizuFocusOn = async () => {
     if_rzuc_kostka.value = false;
     napisRuch.value.focus();
     await nextTick();
-    console.log("plansza win level focus!");
+    //console.log("plansza win level focus!");
     ifFocusEmitGlobal.value = true;
     emit("koniec-etap1-focus");
   }
 };
 
 const koniecPulapki = () => {
-  console.log("emmiter - krok do tyłu");
-  console.log(krok_gracz1_na_planszy.value);
+  //console.log("emmiter - krok do tyłu");
+  //console.log(krok_gracz1_na_planszy.value);
 
   //nowe roziazanie planszy zasadzka - różne efekty po wejściu na pole
   let oIlePol = trapType.value;
-  console.log(oIlePol);
+  //console.log(oIlePol);
 
   if (krok_gracz1_na_planszy.value === 3) {
     krok_gracz1_na_planszy.value = krok_gracz1_na_planszy.value + 1;
     ruch_lokalny = ruch_lokalny + 1;
-    console.log(krok_gracz1_na_planszy.value);
+    //console.log(krok_gracz1_na_planszy.value);
     pionek_left.value =
       pozycje_pionka_gracza1[krok_gracz1_na_planszy.value - 1][0];
     pionek_top.value =
@@ -353,7 +353,7 @@ const koniecPulapki = () => {
   if (krok_gracz1_na_planszy.value === 6) {
     krok_gracz1_na_planszy.value = krok_gracz1_na_planszy.value - 2;
     ruch_lokalny = ruch_lokalny - 2;
-    console.log(krok_gracz1_na_planszy.value);
+    //console.log(krok_gracz1_na_planszy.value);
     pionek_left.value =
       pozycje_pionka_gracza1[krok_gracz1_na_planszy.value - 1][0];
     pionek_top.value =
@@ -362,7 +362,7 @@ const koniecPulapki = () => {
   if (krok_gracz1_na_planszy.value === 8) {
     krok_gracz1_na_planszy.value = krok_gracz1_na_planszy.value + 2;
     ruch_lokalny = ruch_lokalny + 2;
-    console.log(krok_gracz1_na_planszy.value);
+    //console.log(krok_gracz1_na_planszy.value);
     pionek_left.value =
       pozycje_pionka_gracza1[krok_gracz1_na_planszy.value - 1][0];
     pionek_top.value =
@@ -371,14 +371,14 @@ const koniecPulapki = () => {
   if (krok_gracz1_na_planszy.value === 11) {
     krok_gracz1_na_planszy.value = 0;
     ruch_lokalny = 0;
-    console.log(krok_gracz1_na_planszy.value);
+    //console.log(krok_gracz1_na_planszy.value);
     pionek_left.value = 30;
     pionek_top.value = 330;
   }
   if (krok_gracz1_na_planszy.value === 14) {
     krok_gracz1_na_planszy.value = krok_gracz1_na_planszy.value - 1;
     ruch_lokalny = ruch_lokalny - 1;
-    console.log(krok_gracz1_na_planszy.value);
+    //console.log(krok_gracz1_na_planszy.value);
     pionek_left.value =
       pozycje_pionka_gracza1[krok_gracz1_na_planszy.value - 1][0];
     pionek_top.value =
@@ -392,18 +392,18 @@ const koniecPulapki = () => {
 };
 
 const koniecPulapkiFocusOn = async () => {
-  console.log("emmiter - krok do tyłu");
-  console.log(krok_gracz1_na_planszy.value);
+  //console.log("emmiter - krok do tyłu");
+  //console.log(krok_gracz1_na_planszy.value);
 
   //nowe roziazanie planszy zasadzka - różne efekty po wejściu na pole
 
   let oIlePol = trapType.value;
-  console.log(oIlePol);
+  //console.log(oIlePol);
 
   if (krok_gracz1_na_planszy.value === 3) {
     krok_gracz1_na_planszy.value = krok_gracz1_na_planszy.value + 1;
     ruch_lokalny = ruch_lokalny + 1;
-    console.log(krok_gracz1_na_planszy.value);
+    //console.log(krok_gracz1_na_planszy.value);
     pionek_left.value =
       pozycje_pionka_gracza1[krok_gracz1_na_planszy.value - 1][0];
     pionek_top.value =
@@ -412,7 +412,7 @@ const koniecPulapkiFocusOn = async () => {
   if (krok_gracz1_na_planszy.value === 6) {
     krok_gracz1_na_planszy.value = krok_gracz1_na_planszy.value - 2;
     ruch_lokalny = ruch_lokalny - 2;
-    console.log(krok_gracz1_na_planszy.value);
+    //console.log(krok_gracz1_na_planszy.value);
     pionek_left.value =
       pozycje_pionka_gracza1[krok_gracz1_na_planszy.value - 1][0];
     pionek_top.value =
@@ -421,7 +421,7 @@ const koniecPulapkiFocusOn = async () => {
   if (krok_gracz1_na_planszy.value === 8) {
     krok_gracz1_na_planszy.value = krok_gracz1_na_planszy.value + 2;
     ruch_lokalny = ruch_lokalny + 2;
-    console.log(krok_gracz1_na_planszy.value);
+    //console.log(krok_gracz1_na_planszy.value);
     pionek_left.value =
       pozycje_pionka_gracza1[krok_gracz1_na_planszy.value - 1][0];
     pionek_top.value =
@@ -430,14 +430,14 @@ const koniecPulapkiFocusOn = async () => {
   if (krok_gracz1_na_planszy.value === 11) {
     krok_gracz1_na_planszy.value = 0;
     ruch_lokalny = 0;
-    console.log(krok_gracz1_na_planszy.value);
+    //console.log(krok_gracz1_na_planszy.value);
     pionek_left.value = 30;
     pionek_top.value = 330;
   }
   if (krok_gracz1_na_planszy.value === 14) {
     krok_gracz1_na_planszy.value = krok_gracz1_na_planszy.value - 1;
     ruch_lokalny = ruch_lokalny - 1;
-    console.log(krok_gracz1_na_planszy.value);
+    //console.log(krok_gracz1_na_planszy.value);
     pionek_left.value =
       pozycje_pionka_gracza1[krok_gracz1_na_planszy.value - 1][0];
     pionek_top.value =
@@ -457,10 +457,10 @@ const koniecPulapkiFocusOn = async () => {
 };
 
 const odejmijSzanse = () => {
-  console.log("odejmij szanse");
+  //console.log("odejmij szanse");
   ilosc_szans.value = ilosc_szans.value - 1;
 
-  console.log("ilosc_szans:" + ilosc_szans.value);
+  //console.log("ilosc_szans:" + ilosc_szans.value);
   emit("odejmij-gwiazdke");
 
   if (ilosc_szans.value === 2) {
@@ -471,14 +471,14 @@ const odejmijSzanse = () => {
   }
   if (ilosc_szans.value === 0) {
     if_szansa1.value = false;
-    console.log("przegrałeś!!!");
+    //console.log("przegrałeś!!!");
     if_widok_quizz1.value = false;
     if (ifFocusEmitGlobal.value === false) {
-      console.log("przegrana z myszki");
+      //console.log("przegrana z myszki");
       emit("przegrana");
     }
     if (ifFocusEmitGlobal.value === true) {
-      console.log("przegrana z focusa");
+      //console.log("przegrana z focusa");
       emit("przegrana-focus");
     }
   }
